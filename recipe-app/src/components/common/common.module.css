@@ -1,9 +1,17 @@
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  width: 92px;
+  height: var(--header-h);
   text-decoration: none;
   color: var(--leaf);
+}
+
+.brandImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .mark {

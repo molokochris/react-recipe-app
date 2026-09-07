@@ -9,7 +9,11 @@ import styles from "./common.module.css";
 export default function Logo() {
   return (
     <Link to="/" className={styles.logo} aria-label="Platr home">
-      <span className={styles.wordmark}>Platr</span>
+      <img
+        className={styles.brandImage}
+        src="/assets/images/Platr Recipe Website Logo.png"
+        alt="Platr"
+      />
     </Link>
   );
 }
