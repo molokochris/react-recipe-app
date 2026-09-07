@@ -36,7 +36,8 @@ export default function Home() {
             </h1>
             <p>
               Elevating your daily meal planning with simplicity and style.
-              Wholesome, dependable, and organized recipes tailored to your taste.
+              Wholesome, dependable, and organized recipes tailored to your
+              taste.
             </p>
             <div className={styles.actions}>
               <Link to="/meal-planner">
@@ -45,9 +46,7 @@ export default function Home() {
                 </Button>
               </Link>
               <Link to="/recipes">
-                <Button variant="secondary">
-                  Browse Recipes
-                </Button>
+                <Button variant="secondary">Browse Recipes</Button>
               </Link>
             </div>
             <div className={styles.stats}>
@@ -97,8 +96,8 @@ export default function Home() {
             <span className={styles.eyebrow}>Daily audio tip</span>
             <h2>The perfect sear, every time.</h2>
             <p style={{ color: "var(--muted)", margin: "12px 0 20px" }}>
-              Listen to Chef Maria's quick guide on achieving that restaurant-quality
-              crust without overcooking the center.
+              Listen to Chef Maria's quick guide on achieving that
+              restaurant-quality crust without overcooking the center.
             </p>
             <AudioPlayer
               src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"

@@ -60,9 +60,7 @@ export default function Seo({
     }
 
     return () => {
-      document.head
-        .querySelector('script[data-platr-schema="true"]')
-        ?.remove();
+      document.head.querySelector('script[data-platr-schema="true"]')?.remove();
     };
   }, [description, image, path, structuredData, title, type]);
 
