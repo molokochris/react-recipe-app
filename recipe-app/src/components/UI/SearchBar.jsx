@@ -11,11 +11,15 @@ export default function SearchBar({
   value,
   onChange,
   onClear,
+  onSubmit,
   placeholder = "Search recipes, ingredients...",
   className = "",
 }) {
   return (
-    <div className={`${styles.searchWrapper} ${className}`.trim()}>
+    <form
+      className={`${styles.searchWrapper} ${className}`.trim()}
+      onSubmit={onSubmit}
+    >
       <Search className={styles.searchIcon} size={18} />
       <input
         type="text"
@@ -35,7 +39,7 @@ export default function SearchBar({
           <X size={16} />
         </button>
       )}
-    </div>
+    </form>
   );
 }
 
@@ -43,6 +47,7 @@ SearchBar.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onClear: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
   placeholder: PropTypes.string,
   className: PropTypes.string,
 };

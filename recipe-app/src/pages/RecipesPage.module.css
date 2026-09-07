@@ -4,6 +4,15 @@
   padding: 32px 0 24px;
 }
 
+.loadingState {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--muted);
+  font-size: 14px;
+}
+
 .layout {
   display: grid;
   grid-template-columns: 240px 1fr;

@@ -24,14 +24,23 @@ export default function RecipesPage() {
   const [search, setSearch] = useState("");
   const [selectedMealTypes, setSelectedMealTypes] = useState([]);
   const [selectedDifficulty, setSelectedDifficulty] = useState("All");
+  const [isLoading, setIsLoading] = useState(true);
 
   // Sync document title on page load
   useEffect(() => {
     document.title = "Explore Recipes | Platr";
+    const loadingTimer = window.setTimeout(() => setIsLoading(false), 300);
+
     return () => {
+      window.clearTimeout(loadingTimer);
       document.title = "Platr: Smart Meal Planning & Recipes";
     };
   }, []);
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    setSearch((currentSearch) => currentSearch.trim());
+  };
 
   // Toggle meal type checkbox selection
   const handleMealTypeToggle = (type) => {
@@ -72,12 +81,19 @@ export default function RecipesPage() {
           />
         </div>
 
+        {isLoading && (
+          <div className={styles.loadingState} role="status" aria-live="polite">
+            Loading recipes...
+          </div>
+        )}
+
         {/* Top Search Bar */}
         <div className={styles.top}>
           <SearchBar
             value={search}
             onChange={setSearch}
             onClear={() => setSearch("")}
+            onSubmit={handleSearchSubmit}
             placeholder="Search by recipe name, ingredient (e.g. avocado, salmon), or cuisine..."
           />
         </div>
