@@ -26,9 +26,26 @@ export default function ShareMenu({ title = "Share Platr" }) {
   }, [isOpen]);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(pageUrl);
-    setIsCopied(true);
-    window.setTimeout(() => setIsCopied(false), 2000);
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(pageUrl);
+      } else {
+        const copyInput = document.createElement("textarea");
+        copyInput.value = pageUrl;
+        copyInput.setAttribute("readonly", "");
+        copyInput.style.position = "fixed";
+        copyInput.style.opacity = "0";
+        document.body.appendChild(copyInput);
+        copyInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(copyInput);
+      }
+
+      setIsCopied(true);
+      window.setTimeout(() => setIsCopied(false), 2000);
+    } catch {
+      setIsCopied(false);
+    }
   };
 
   return (
