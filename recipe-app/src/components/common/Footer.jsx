@@ -3,7 +3,9 @@
  * Global site footer with branding, support links, social icons, and copyright.
  */
 
-import { Mail, Globe, Share2 } from "lucide-react";
+import { Mail } from "lucide-react";
+import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
+import ShareMenu from "./ShareMenu";
 import styles from "./common.module.css";
 
 export default function Footer() {
@@ -24,15 +26,37 @@ export default function Footer() {
           <div>
             <span className={styles.footerTitle}>Social</span>
             <div className={styles.socials}>
-              <a href="#share" aria-label="Share Platr">
-                <Share2 size={20} />
+              <a
+                href="https://www.linkedin.com/in/molokochris"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Moloko Chris on LinkedIn"
+              >
+                <FaLinkedinIn size={18} />
               </a>
-              <a href="#web" aria-label="Platr Website">
-                <Globe size={20} />
+              <a
+                href="https://www.instagram.com/molokochris"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Moloko Chris on Instagram"
+              >
+                <FaInstagram size={18} />
               </a>
-              <a href="#mail" aria-label="Contact support via email">
+              <a
+                href="https://github.com/molokochris"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Moloko Chris on GitHub"
+              >
+                <FaGithub size={18} />
+              </a>
+              <a
+                href="mailto:molokochrisp742@gmail.com"
+                aria-label="Email Moloko Chris"
+              >
                 <Mail size={20} />
               </a>
+              <ShareMenu />
             </div>
           </div>
         </div>

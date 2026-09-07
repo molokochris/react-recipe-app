@@ -104,7 +104,60 @@
 
 .socials {
   display: flex;
+  align-items: center;
   gap: 16px;
+}
+
+.socials a,
+.socialButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.shareMenu {
+  position: relative;
+}
+
+.shareOptions {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 12px);
+  z-index: 2;
+  display: grid;
+  min-width: 150px;
+  padding: 8px;
+  gap: 2px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+}
+
+.shareOptions a,
+.shareOptions button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.shareOptions a:hover,
+.shareOptions button:hover {
+  border-radius: 4px;
+  background: var(--bg-soft);
 }
 
 .copy {

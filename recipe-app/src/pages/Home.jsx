@@ -9,6 +9,7 @@ import { RECIPES_DATA } from "../data/recipesData";
 import { useFavorites } from "../hooks/useFavorites";
 import RecipeList from "../components/Recipe/RecipeList";
 import AudioPlayer from "../components/Media/AudioPlayer";
+import Seo from "../components/common/Seo";
 import Button from "../components/UI/Button";
 import styles from "./Home.module.css";
 
@@ -20,6 +21,11 @@ export default function Home() {
 
   return (
     <main className="page">
+      <Seo
+        title="Platr | Smart Recipes and Meal Planning"
+        description="Discover dependable recipes, plan your weekly meals, and save your favorite dishes with Platr."
+        path="/"
+      />
       <div className="wrap">
         {/* Hero Section */}
         <section className={styles.hero}>

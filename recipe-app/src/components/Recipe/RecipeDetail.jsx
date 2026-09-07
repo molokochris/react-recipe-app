@@ -7,13 +7,23 @@
 
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Clock, Heart, Users, CalendarPlus, Share2, Check, Flame } from "lucide-react";
+import {
+  ArrowLeft,
+  Clock,
+  Heart,
+  Users,
+  CalendarPlus,
+  Check,
+  Flame,
+} from "lucide-react";
 import { RECIPES_DATA } from "../../data/recipesData";
 import { useFavorites } from "../../hooks/useFavorites";
 import { useMealPlan } from "../../hooks/useMealPlan";
 import VideoPlayer from "../Media/VideoPlayer";
 import AudioPlayer from "../Media/AudioPlayer";
 import Button from "../UI/Button";
+import ShareMenu from "../common/ShareMenu";
+import Seo, { SITE_URL } from "../common/Seo";
 import styles from "./Recipe.module.css";
 
 const DAYS_OF_WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -64,24 +74,62 @@ export default function RecipeDetail() {
   }
 
   const favorited = isFavorite(recipe.id);
-
-  const handleShare = () => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href);
-      setToastMessage("Link copied to clipboard!");
-      setTimeout(() => setToastMessage(""), 3000);
-    }
+  const recipeSchema = {
+    "@context": "https://schema.org",
+    "@type": "Recipe",
+    name: recipe.title,
+    description: recipe.description,
+    image: [recipe.image],
+    url: `${SITE_URL}/recipes/${recipe.id}`,
+    author: {
+      "@type": "Organization",
+      name: "Platr",
+      url: SITE_URL,
+    },
+    prepTime: `PT${parseInt(recipe.prepTime, 10)}M`,
+    cookTime: `PT${parseInt(recipe.cookTime, 10)}M`,
+    totalTime: `PT${parseInt(recipe.prepTime, 10) + parseInt(recipe.cookTime, 10)}M`,
+    recipeYield: `${recipe.servings} servings`,
+    recipeCategory: recipe.mealType,
+    keywords: recipe.tags.join(", "),
+    recipeIngredient: recipe.ingredients.map((ingredient) =>
+      typeof ingredient === "string"
+        ? ingredient
+        : `${ingredient.amount} ${ingredient.item}`,
+    ),
+    recipeInstructions: recipe.instructions.map((instruction, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: instruction.title || `Step ${index + 1}`,
+      text: instruction.text || instruction,
+    })),
+    nutrition: recipe.calories
+      ? {
+          "@type": "NutritionInformation",
+          calories: recipe.calories,
+        }
+      : undefined,
   };
 
   const handleAddToPlan = () => {
     addMeal(Number(selectedDayIdx), selectedSlot, recipe.id);
     setIsModalOpen(false);
-    setToastMessage(`Added to ${DAYS_OF_WEEK[selectedDayIdx]} ${selectedSlot}!`);
+    setToastMessage(
+      `Added to ${DAYS_OF_WEEK[selectedDayIdx]} ${selectedSlot}!`,
+    );
     setTimeout(() => setToastMessage(""), 3500);
   };
 
   return (
     <main className="page">
+      <Seo
+        title={`${recipe.title} | Platr`}
+        description={recipe.description}
+        path={`/recipes/${recipe.id}`}
+        image={recipe.image}
+        type="article"
+        structuredData={recipeSchema}
+      />
       {/* Hero background image */}
       <div
         className={styles.detailHero}
@@ -94,7 +142,9 @@ export default function RecipeDetail() {
           <button
             type="button"
             className={`${styles.heart} ${favorited ? styles.filled : ""}`}
-            aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
+            aria-label={
+              favorited ? "Remove from favorites" : "Add to favorites"
+            }
             onClick={() => toggleFavorite(recipe.id)}
           >
             <Heart size={18} fill={favorited ? "currentColor" : "none"} />
@@ -120,7 +170,8 @@ export default function RecipeDetail() {
 
         <div className={styles.meta} style={{ marginTop: 16 }}>
           <span>
-            <Clock size={16} /> Cook: {recipe.cookTime} (Prep: {recipe.prepTime})
+            <Clock size={16} /> Cook: {recipe.cookTime} (Prep: {recipe.prepTime}
+            )
           </span>
           <span>
             <Users size={16} /> Serves {recipe.servings}
@@ -133,18 +184,10 @@ export default function RecipeDetail() {
         </div>
 
         <div className={styles.actions}>
-          <Button
-            variant="primary"
-            onClick={() => setIsModalOpen(true)}
-          >
+          <Button variant="primary" onClick={() => setIsModalOpen(true)}>
             <CalendarPlus size={16} /> Add to Meal Planner
           </Button>
-          <Button
-            variant="secondary"
-            onClick={handleShare}
-          >
-            <Share2 size={16} /> Share
-          </Button>
+          <ShareMenu title={recipe.title} />
         </div>
 
         {toastMessage && (
@@ -217,7 +260,9 @@ export default function RecipeDetail() {
           {(recipe.instructions || []).map((step, idx) => (
             <div key={idx} className={styles.step}>
               <div className={styles.stepHeader}>
-                <span className={styles.stepNumber}>{step.step || idx + 1}</span>
+                <span className={styles.stepNumber}>
+                  {step.step || idx + 1}
+                </span>
                 <span>{step.title || `Step ${idx + 1}`}</span>
               </div>
               <p className={styles.stepText}>{step.text || step}</p>
@@ -232,10 +277,7 @@ export default function RecipeDetail() {
           className={styles.modalBackdrop}
           onClick={() => setIsModalOpen(false)}
         >
-          <div
-            className={styles.modal}
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalHead}>
               <h3>Add to Meal Planner</h3>
             </div>
@@ -276,16 +318,10 @@ export default function RecipeDetail() {
             </div>
 
             <div className={styles.modalActions}>
-              <Button
-                variant="ghost"
-                onClick={() => setIsModalOpen(false)}
-              >
+              <Button variant="ghost" onClick={() => setIsModalOpen(false)}>
                 Cancel
               </Button>
-              <Button
-                variant="primary"
-                onClick={handleAddToPlan}
-              >
+              <Button variant="primary" onClick={handleAddToPlan}>
                 Confirm Add
               </Button>
             </div>
