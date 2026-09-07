@@ -5,6 +5,7 @@
 
 import { Mail } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import ShareMenu from "./ShareMenu";
 import styles from "./common.module.css";
 
@@ -14,7 +15,9 @@ export default function Footer() {
       <div className="wrap">
         <div className={styles.footerGrid}>
           <div>
-            <span className={styles.footerTitle}>Platr</span>
+            <Link to="/" className={styles.footerBrand} aria-label="Platr home">
+              <img src="/assets/images/platr-logo.png" alt="Platr" />
+            </Link>
             <p>Elevating your daily meal planning with simplicity and style.</p>
           </div>
           <div className={styles.footerLinks}>

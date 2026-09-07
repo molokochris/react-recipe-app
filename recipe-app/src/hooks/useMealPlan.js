@@ -11,20 +11,54 @@ import { storage } from "../utils/helpers";
 const STORAGE_KEY = "platr_meal_plan";
 
 const DEFAULT_DAYS = [
-  { name: "Mon", num: 28, meals: { lunch: "5", dinner: "7" } },
-  { name: "Tue", num: 29, meals: { breakfast: "8" } },
-  { name: "Wed", num: 30, meals: { lunch: "6" } },
-  { name: "Thu", num: 31, meals: { dinner: "1" } },
-  { name: "Fri", num: 1, meals: { dinner: "3" } },
-  { name: "Sat", num: 2, meals: { breakfast: "2" } },
-  { name: "Sun", num: 3, meals: { lunch: "4", dinner: "7" } },
+  { name: "Mon", meals: { lunch: "5", dinner: "7" } },
+  { name: "Tue", meals: { breakfast: "8" } },
+  { name: "Wed", meals: { lunch: "6" } },
+  { name: "Thu", meals: { dinner: "1" } },
+  { name: "Fri", meals: { dinner: "3" } },
+  { name: "Sat", meals: { breakfast: "2" } },
+  { name: "Sun", meals: { lunch: "4", dinner: "7" } },
 ];
+
+const DAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+function getMonday(date) {
+  const monday = new Date(date);
+  const day = monday.getDay();
+  const daysSinceMonday = day === 0 ? 6 : day - 1;
+  monday.setDate(monday.getDate() - daysSinceMonday);
+  monday.setHours(12, 0, 0, 0);
+  return monday;
+}
+
+function formatDate(date) {
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+}
 
 export function useMealPlan() {
   const [weekOffset, setWeekOffset] = useState(0);
   const [plan, setPlan] = useState(() => {
     return storage.get(STORAGE_KEY, DEFAULT_DAYS);
   });
+
+  const displayedPlan = useMemo(() => {
+    const weekStart = getMonday(new Date());
+    weekStart.setDate(weekStart.getDate() + weekOffset * 7);
+
+    return plan.map((day, index) => {
+      const date = new Date(weekStart);
+      date.setDate(weekStart.getDate() + index);
+
+      return {
+        ...day,
+        name: DAY_NAMES[index],
+        num: date.getDate(),
+      };
+    });
+  }, [plan, weekOffset]);
 
   // Sync state changes with localStorage
   useEffect(() => {
@@ -93,10 +127,20 @@ export function useMealPlan() {
    * Computed week title label.
    */
   const weekLabel = useMemo(() => {
-    if (weekOffset === 0) return "This Week (Oct 28 - Nov 3)";
-    if (weekOffset === 1) return "Next Week (Nov 4 - Nov 10)";
-    if (weekOffset === -1) return "Last Week (Oct 21 - Oct 27)";
-    return `Week offset: ${weekOffset > 0 ? "+" : ""}${weekOffset}`;
+    const weekStart = getMonday(new Date());
+    weekStart.setDate(weekStart.getDate() + weekOffset * 7);
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 6);
+    const prefix =
+      weekOffset === 0
+        ? "This Week"
+        : weekOffset === 1
+          ? "Next Week"
+          : weekOffset === -1
+            ? "Last Week"
+            : "Week";
+
+    return `${prefix} (${formatDate(weekStart)} - ${formatDate(weekEnd)})`;
   }, [weekOffset]);
 
   /**
@@ -108,7 +152,7 @@ export function useMealPlan() {
   }, []);
 
   return {
-    plan,
+    plan: displayedPlan,
     addMeal,
     removeMeal,
     clearWeek,

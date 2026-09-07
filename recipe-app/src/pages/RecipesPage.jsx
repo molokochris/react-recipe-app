@@ -45,7 +45,7 @@ export default function RecipesPage() {
   // Toggle meal type checkbox selection
   const handleMealTypeToggle = (type) => {
     setSelectedMealTypes((prev) =>
-      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type],
     );
   };
 
