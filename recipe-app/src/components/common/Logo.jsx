@@ -11,7 +11,7 @@ export default function Logo() {
     <Link to="/" className={styles.logo} aria-label="Platr home">
       <img
         className={styles.brandImage}
-        src="/assets/images/Platr Recipe Website Logo.png"
+        src="/assets/images/platr-logo.png"
         alt="Platr"
       />
     </Link>
