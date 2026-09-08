@@ -1,6 +1,9 @@
 {
   "name": "Platr",
   "short_name": "Platr",
+  "description": "Smart recipes and meal planning for everyday cooking.",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png?v=20260908",
@@ -17,5 +20,6 @@
   ],
   "theme_color": "#ffffff",
   "background_color": "#b4c2c0",
-  "display": "standalone"
+  "display": "standalone",
+  "categories": ["food", "lifestyle"]
 }
