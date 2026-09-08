@@ -21,7 +21,7 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     audioTip: {
       title: "Mastering Jammy Eggs",
       subtitle: "Chef Maria - 6-Minute Egg Technique",
@@ -79,7 +79,7 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
     audioTip: {
       title: "Gentle Egg Poaching",
       subtitle: "Chef Antoine - Low Heat Simmer Secrets",
@@ -136,7 +136,7 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1727056353458-d985e6aa06b4?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     audioTip: {
       title: "The Perfect Salmon Sear",
       subtitle: "Chef Maria - Skin-Crisping Guide",
@@ -192,7 +192,7 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
     audioTip: {
       title: "Foolproof Egg Poaching",
       subtitle: "Chef Ken - Vortex & Vinegar Method",
@@ -242,7 +242,7 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
     audioTip: {
       title: "Tahini Dressing Balance",
       subtitle: "Chef Amina - Emulsification Secrets",
@@ -298,7 +298,7 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1568897798550-91c8caffe391?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4",
+      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4",
     audioTip: {
       title: "Marinating Chickpeas",
       subtitle: "Chef Nikos - Herb Infusion Technique",
@@ -355,7 +355,7 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
     audioTip: {
       title: "Pan Searing Chicken Breasts",
       subtitle: "Chef Lorenzo - Temperature Control",
@@ -409,7 +409,7 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+      "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
     audioTip: {
       title: "Toasting Oats for Maximum Flavor",
       subtitle: "Chef Chloe - Nutty Aromas",
