@@ -16,7 +16,7 @@ A modern, responsive React web application for recipe discovery, nutritional pla
 
 ### 3. Dynamic Recipe Detail and Video Player
 
-[![Recipe Detail & Video Player](https://github.com/molokochris/react-recipe-app/raw/main/recipe-app/screenshots/recipe-app-chi-jade.vercel.app-recipes.png)](/molokochris/react-recipe-app/blob/main/recipe-app/screenshots/recipe-app-chi-jade.vercel.app-recipes-2.png)
+[![Recipe Detail & Video Player](https://github.com/molokochris/react-recipe-app/raw/main/recipe-app/screenshots/recipe-app-chi-jade.vercel.app-recipes-2.png)](/molokochris/react-recipe-app/blob/main/recipe-app/screenshots/recipe-app-chi-jade.vercel.app-recipes-2.png)
 
 ### 4. Weekly Meal Planner
 
