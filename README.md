@@ -8,29 +8,27 @@ A modern, responsive React web application for recipe discovery, nutritional pla
 
 ### 1. Home and Trending Picks
 
-![Home Page](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app.png)
+[![Home Page](https://github.com/molokochris/react-recipe-app/raw/main/recipe-app/screenshots/recipe-app-chi-jade.vercel.app.png)](/molokochris/react-recipe-app/blob/main/recipe-app/screenshots/recipe-app-chi-jade.vercel.app.png)
 
 ### 2. Search and Multi-Faceted Filters
 
-![Recipes Search](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app-recipes.png)
+[![Recipes Search & Filters](https://github.com/molokochris/react-recipe-app/raw/main/recipe-app/screenshots/recipe-app-chi-jade.vercel.app-recipes.png)](/molokochris/react-recipe-app/blob/main/recipe-app/screenshots/recipe-app-chi-jade.vercel.app-recipes.png)
 
 ### 3. Dynamic Recipe Detail and Video Player
 
-![Recipe Detail](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app-recipes-2.png)
+*(no matching screenshot currently in the repo — see note below)*
 
 ### 4. Weekly Meal Planner
 
-![Weekly Meal Planner](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app-meal-planner.png)
+[![Weekly Meal Planner](https://github.com/molokochris/react-recipe-app/raw/main/recipe-app/screenshots/recipe-app-chi-jade.vercel.app-meal-planner.png)](/molokochris/react-recipe-app/blob/main/recipe-app/screenshots/recipe-app-chi-jade.vercel.app-meal-planner.png)
 
 ### 5. Bookmarked Favorites
 
-![Saved Favorites](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app-favorites.png)
+[![Saved Favorites](https://github.com/molokochris/react-recipe-app/raw/main/recipe-app/screenshots/recipe-app-chi-jade.vercel.app-favorites.png)](/molokochris/react-recipe-app/blob/main/recipe-app/screenshots/recipe-app-chi-jade.vercel.app-favorites.png)
 
 ### 6. Responsive Mobile View
 
-![Mobile View](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app.mobile.png)
-
----
+[![Mobile View](https://github.com/molokochris/react-recipe-app/raw/main/recipe-app/screenshots/recipe-app-chi-jade.vercel.app.mobile.png)](/molokochris/react-recipe-app/blob/main/recipe-app/screenshots/recipe-app-chi-jade.vercel.app.mobile.png)---
 
 ## Key Features
 
