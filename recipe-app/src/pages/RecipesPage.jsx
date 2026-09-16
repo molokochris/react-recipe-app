@@ -14,7 +14,7 @@ import Button from "../components/UI/Button";
 import Header from "../components/common/Header";
 import styles from "./RecipesPage.module.css";
 
-const MEAL_TYPES = ["Breakfast", "Lunch", "Dinner"];
+const MEAL_TYPES = ["Breakfast", "Lunch", "Dinner", "Dessert", "Snacks"];
 const DIFFICULTIES = ["All", "Easy", "Medium", "Hard"];
 
 export default function RecipesPage() {
