@@ -51,7 +51,7 @@ export default function Home() {
             </div>
             <div className={styles.stats}>
               <div>
-                <strong>8+</strong>
+                <strong>17</strong>
                 <span>Curated Recipes</span>
               </div>
               <div>
@@ -95,7 +95,7 @@ export default function Home() {
           <div>
             <span className={styles.eyebrow}>Daily audio tip</span>
             <h2>The perfect sear, every time.</h2>
-            <p style={{ color: "var(--muted)", margin: "12px 0 20px" }}>
+            <p className={styles.audioLead}>
               Listen to Chef Maria's quick guide on achieving that
               restaurant-quality crust without overcooking the center.
             </p>

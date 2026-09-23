@@ -1,0 +1,29 @@
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+}
+
+.card {
+  max-width: 480px;
+  text-align: center;
+  padding: 48px 32px;
+}
+
+.icon {
+  margin-bottom: 16px;
+  color: var(--primary);
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.text {
+  color: var(--muted);
+  margin-bottom: 24px;
+  font-size: 15px;
+}

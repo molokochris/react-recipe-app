@@ -14,12 +14,13 @@ export const RECIPES_DATA = [
     prepTime: "15 min",
     servings: 2,
     calories: "520 kcal",
-    difficulty: "Medium",
+    difficulty: "Hard",
     mealType: "Dinner",
+    cuisine: "Japanese",
     tags: ["Vegetarian", "Dinner", "Japanese", "Comfort Food"],
     featured: true,
     image:
-      "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=600&q=80",
     videoUrl:
       "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     audioTip: {
@@ -74,10 +75,11 @@ export const RECIPES_DATA = [
     calories: "380 kcal",
     difficulty: "Easy",
     mealType: "Breakfast",
+    cuisine: "Mediterranean",
     tags: ["Gluten Free", "Breakfast", "Vegetarian", "Mediterranean"],
     featured: true,
     image:
-      "https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1590412200988-a436970781fa?auto=format&fit=crop&w=600&q=80",
     videoUrl:
       "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
     audioTip: {
@@ -131,6 +133,7 @@ export const RECIPES_DATA = [
     calories: "590 kcal",
     difficulty: "Medium",
     mealType: "Dinner",
+    cuisine: "American",
     tags: ["Pescatarian", "Dinner", "High Protein", "Gluten Free"],
     featured: true,
     image:
@@ -187,10 +190,11 @@ export const RECIPES_DATA = [
     calories: "340 kcal",
     difficulty: "Easy",
     mealType: "Breakfast",
+    cuisine: "American",
     tags: ["Breakfast", "Vegetarian", "Quick & Easy", "Healthy"],
     featured: false,
     image:
-      "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?auto=format&fit=crop&w=600&q=80",
     videoUrl:
       "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
     audioTip: {
@@ -237,6 +241,7 @@ export const RECIPES_DATA = [
     calories: "460 kcal",
     difficulty: "Medium",
     mealType: "Lunch",
+    cuisine: "American",
     tags: ["Lunch", "Vegan", "Gluten Free", "Meal Prep"],
     featured: false,
     image:
@@ -293,6 +298,7 @@ export const RECIPES_DATA = [
     calories: "310 kcal",
     difficulty: "Easy",
     mealType: "Lunch",
+    cuisine: "Mediterranean",
     tags: ["Lunch", "Vegetarian", "Mediterranean", "Quick & Easy"],
     featured: false,
     image:
@@ -350,10 +356,11 @@ export const RECIPES_DATA = [
     calories: "540 kcal",
     difficulty: "Medium",
     mealType: "Dinner",
+    cuisine: "Italian",
     tags: ["Dinner", "High Protein", "Italian", "Comfort Food"],
     featured: false,
     image:
-      "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=600&q=80",
     videoUrl:
       "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
     audioTip: {
@@ -404,10 +411,11 @@ export const RECIPES_DATA = [
     calories: "290 kcal",
     difficulty: "Easy",
     mealType: "Breakfast",
+    cuisine: "American",
     tags: ["Breakfast", "Vegan", "Heart Healthy", "Gluten Free"],
     featured: false,
     image:
-      "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1517673400267-0251440c45dc?auto=format&fit=crop&w=600&q=80",
     videoUrl:
       "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
     audioTip: {
@@ -452,12 +460,13 @@ export const RECIPES_DATA = [
     prepTime: "15 min",
     servings: 4,
     calories: "410 kcal",
-    difficulty: "Medium",
+    difficulty: "Hard",
     mealType: "Dessert",
+    cuisine: "French",
     tags: ["Dessert", "Chocolate", "Comfort Food", "Vegetarian"],
     featured: true,
     image:
-      "https://images.unsplash.com/photo-1517427294546-5aa121f68e8a?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80",
     videoUrl:
       "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     audioTip: {
@@ -510,10 +519,11 @@ export const RECIPES_DATA = [
     calories: "380 kcal",
     difficulty: "Easy",
     mealType: "Dessert",
+    cuisine: "American",
     tags: ["Dessert", "No-Bake", "Vegetarian", "Make Ahead"],
     featured: false,
     image:
-      "https://images.unsplash.com/photo-1517427294546-5aa121f68e8a?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80",
     videoUrl:
       "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
     audioTip: {
@@ -566,10 +576,11 @@ export const RECIPES_DATA = [
     calories: "350 kcal",
     difficulty: "Easy",
     mealType: "Dessert",
+    cuisine: "American",
     tags: ["Dessert", "Comfort Food", "Vegetarian", "Fall Favorite"],
     featured: false,
     image:
-      "https://images.unsplash.com/photo-1517427294546-5aa121f68e8a?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?auto=format&fit=crop&w=600&q=80",
     videoUrl:
       "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     audioTip: {
@@ -622,6 +633,7 @@ export const RECIPES_DATA = [
     calories: "180 kcal",
     difficulty: "Easy",
     mealType: "Snacks",
+    cuisine: "Mediterranean",
     tags: ["Snacks", "Vegan", "Gluten Free", "Meal Prep"],
     featured: true,
     image:
@@ -678,10 +690,11 @@ export const RECIPES_DATA = [
     calories: "160 kcal",
     difficulty: "Easy",
     mealType: "Snacks",
+    cuisine: "Mediterranean",
     tags: ["Snacks", "Vegan", "Gluten Free", "High Protein"],
     featured: false,
     image:
-      "https://images.unsplash.com/photo-1637949385162-e416fb15b2ce?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?auto=format&fit=crop&w=600&q=80",
     videoUrl:
       "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
     audioTip: {
@@ -735,10 +748,11 @@ export const RECIPES_DATA = [
     calories: "480 kcal",
     difficulty: "Easy",
     mealType: "Lunch",
+    cuisine: "Mediterranean",
     tags: ["Lunch", "Vegetarian", "Mediterranean", "Quick & Easy"],
     featured: false,
     image:
-      "https://images.unsplash.com/photo-1568897798550-91c8caffe391?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80",
     videoUrl:
       "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4",
     audioTip: {
@@ -791,10 +805,11 @@ export const RECIPES_DATA = [
     calories: "390 kcal",
     difficulty: "Medium",
     mealType: "Lunch",
+    cuisine: "Thai",
     tags: ["Lunch", "High Protein", "Thai", "Gluten Free"],
     featured: true,
     image:
-      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1778168199427-4e839943d20f?auto=format&fit=crop&w=600&q=80",
     videoUrl:
       "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
     audioTip: {
@@ -847,10 +862,11 @@ export const RECIPES_DATA = [
     calories: "560 kcal",
     difficulty: "Medium",
     mealType: "Dinner",
+    cuisine: "American",
     tags: ["Dinner", "High Protein", "One-Pan", "Gluten Free"],
     featured: false,
     image:
-      "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=600&q=80",
     videoUrl:
       "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
     audioTip: {
@@ -903,10 +919,11 @@ export const RECIPES_DATA = [
     calories: "470 kcal",
     difficulty: "Medium",
     mealType: "Dinner",
+    cuisine: "Thai",
     tags: ["Dinner", "Pescatarian", "Thai", "Spicy"],
     featured: true,
     image:
-      "https://images.unsplash.com/photo-1727056353458-d985e6aa06b4?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=600&q=80",
     videoUrl:
       "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     audioTip: {

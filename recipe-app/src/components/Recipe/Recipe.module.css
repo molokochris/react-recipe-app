@@ -141,6 +141,10 @@
   max-width: 400px;
 }
 
+.emptyAction {
+  margin-top: 12px;
+}
+
 /* Recipe Detail Layout */
 .detailHero {
   height: 320px;
@@ -199,11 +203,56 @@
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
+.detailTitle {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: 8px;
+}
+
+.detailMeta {
+  margin-top: 16px;
+}
+
 .description {
   color: var(--muted);
   font-size: 16px;
   margin: 12px 0 16px;
   line-height: 1.6;
+}
+
+.toast {
+  margin-top: 16px;
+  padding: 10px 16px;
+  background: var(--leaf);
+  color: var(--leaf-dark);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mediaHeading {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.notFound {
+  padding-top: 64px;
+  text-align: center;
+}
+
+.notFoundText {
+  color: var(--muted);
+  margin: 16px 0 24px;
+}
+
+.modalHint {
+  font-size: 14px;
+  color: var(--muted);
 }
 
 .actions {

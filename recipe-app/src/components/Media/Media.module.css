@@ -97,6 +97,29 @@
   transform: scale(1.06);
 }
 
+.playNudge {
+  margin-left: 3px;
+}
+
+.audioFallback,
+.videoFallback {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.audioFallback a,
+.videoFallback a {
+  color: inherit;
+  font-weight: 600;
+}
+
+.videoFallback {
+  color: #ffffff;
+  padding: 24px;
+  text-align: center;
+}
+
 .volumeBtn {
   background: none;
   border: none;
@@ -148,11 +171,15 @@
   transition: opacity 0.3s ease;
 }
 
-.videoControlBar {
+.videoControlBar,
+.videoControlGroup {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
+}
+
+.videoControlBar {
+  justify-content: space-between;
 }
 
 .videoBtn {

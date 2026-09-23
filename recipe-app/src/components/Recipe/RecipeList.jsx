@@ -22,7 +22,7 @@ export default function RecipeList({
         <Utensils size={40} color="var(--line)" />
         <div className={styles.emptyStateTitle}>{emptyTitle}</div>
         <div className={styles.emptyStateText}>{emptyMessage}</div>
-        {emptyAction && <div style={{ marginTop: 12 }}>{emptyAction}</div>}
+        {emptyAction && <div className={styles.emptyAction}>{emptyAction}</div>}
       </div>
     );
   }

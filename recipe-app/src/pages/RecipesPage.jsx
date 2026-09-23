@@ -7,15 +7,14 @@
 import { useState, useMemo, useEffect } from "react";
 import { RECIPES_DATA } from "../data/recipesData";
 import { useFavorites } from "../hooks/useFavorites";
-import { filterRecipes } from "../utils/helpers";
+import { filterRecipes, sortRecipes } from "../utils/helpers";
 import SearchBar from "../components/UI/SearchBar";
 import RecipeList from "../components/Recipe/RecipeList";
+import RecipeFilter from "../components/Recipe/RecipeFilter";
 import Button from "../components/UI/Button";
+import Loading from "../components/UI/Loading";
 import Header from "../components/common/Header";
 import styles from "./RecipesPage.module.css";
-
-const MEAL_TYPES = ["Breakfast", "Lunch", "Dinner", "Dessert", "Snacks"];
-const DIFFICULTIES = ["All", "Easy", "Medium", "Hard"];
 
 export default function RecipesPage() {
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -23,7 +22,9 @@ export default function RecipesPage() {
   // Search and filter states
   const [search, setSearch] = useState("");
   const [selectedMealTypes, setSelectedMealTypes] = useState([]);
+  const [selectedCuisines, setSelectedCuisines] = useState([]);
   const [selectedDifficulty, setSelectedDifficulty] = useState("All");
+  const [sortBy, setSortBy] = useState("default");
   const [isLoading, setIsLoading] = useState(true);
 
   // Sync document title on page load
@@ -49,31 +50,43 @@ export default function RecipesPage() {
     );
   };
 
+  const handleCuisineToggle = (cuisine) => {
+    setSelectedCuisines((prev) =>
+      prev.includes(cuisine) ? prev.filter((item) => item !== cuisine) : [...prev, cuisine],
+    );
+  };
+
   // Reset all active filters
   const handleResetFilters = () => {
     setSearch("");
     setSelectedMealTypes([]);
+    setSelectedCuisines([]);
     setSelectedDifficulty("All");
+    setSortBy("default");
   };
 
-  // Filtered recipe list computed via helper
+  // Filtered and sorted recipe list computed via helpers
   const filteredRecipes = useMemo(() => {
-    return filterRecipes(RECIPES_DATA, {
+    const filtered = filterRecipes(RECIPES_DATA, {
       search,
       mealTypes: selectedMealTypes,
+      cuisines: selectedCuisines,
       difficulty: selectedDifficulty,
     });
-  }, [search, selectedMealTypes, selectedDifficulty]);
+    return sortRecipes(filtered, sortBy);
+  }, [search, selectedMealTypes, selectedCuisines, selectedDifficulty, sortBy]);
 
   const hasActiveFilters =
     search.trim() !== "" ||
     selectedMealTypes.length > 0 ||
-    selectedDifficulty !== "All";
+    selectedCuisines.length > 0 ||
+    selectedDifficulty !== "All" ||
+    sortBy !== "default";
 
   return (
     <main className="page">
       <div className="wrap">
-        <div style={{ paddingTop: 32 }}>
+        <div className={styles.intro}>
           <Header
             eyebrow="Explore & Cook"
             title="All Recipes"
@@ -81,11 +94,7 @@ export default function RecipesPage() {
           />
         </div>
 
-        {isLoading && (
-          <div className={styles.loadingState} role="status" aria-live="polite">
-            Loading recipes...
-          </div>
-        )}
+        {isLoading && <Loading />}
 
         {/* Top Search Bar */}
         <div className={styles.top}>
@@ -100,54 +109,18 @@ export default function RecipesPage() {
 
         {/* Filters and Recipe Grid Layout */}
         <div className={styles.layout}>
-          <aside className={styles.filters}>
-            <div className={styles.filtersHead}>
-              <h2>Filters</h2>
-              {hasActiveFilters && (
-                <button
-                  type="button"
-                  className={styles.resetBtn}
-                  onClick={handleResetFilters}
-                >
-                  Reset All
-                </button>
-              )}
-            </div>
-
-            {/* Meal Type Checkboxes */}
-            <div className={styles.filterGroup}>
-              <span className={styles.filterGroupTitle}>Meal Type</span>
-              {MEAL_TYPES.map((type) => (
-                <label key={type} className={styles.filterLabel}>
-                  <input
-                    type="checkbox"
-                    checked={selectedMealTypes.includes(type)}
-                    onChange={() => handleMealTypeToggle(type)}
-                  />
-                  {type}
-                </label>
-              ))}
-            </div>
-
-            {/* Difficulty Chips */}
-            <div className={styles.filterGroup}>
-              <span className={styles.filterGroupTitle}>Difficulty</span>
-              <div className={styles.chips}>
-                {DIFFICULTIES.map((diff) => (
-                  <button
-                    key={diff}
-                    type="button"
-                    className={
-                      selectedDifficulty === diff ? styles.chipOn : styles.chip
-                    }
-                    onClick={() => setSelectedDifficulty(diff)}
-                  >
-                    {diff}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </aside>
+          <RecipeFilter
+            selectedMealTypes={selectedMealTypes}
+            onToggleMealType={handleMealTypeToggle}
+            selectedCuisines={selectedCuisines}
+            onToggleCuisine={handleCuisineToggle}
+            selectedDifficulty={selectedDifficulty}
+            onSelectDifficulty={setSelectedDifficulty}
+            sortBy={sortBy}
+            onSortChange={setSortBy}
+            hasActiveFilters={hasActiveFilters}
+            onReset={handleResetFilters}
+          />
 
           {/* Recipes Content Area */}
           <div className={styles.contentArea}>

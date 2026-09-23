@@ -35,11 +35,11 @@ A modern, responsive React web application for recipe discovery, nutritional pla
 ## Key Features
 
 1. **Centralized Recipe Catalog (`recipesData.js`)**:
-   - 8 complete recipes with cook times, servings, calories, difficulty ratings, dietary tags, ingredient lists, and step-by-step instructions.
+   - 17 complete recipes across Breakfast (3), Lunch (4), Dinner (5), Dessert (3), and Snacks (2), with cook times, servings, calories, difficulty ratings, dietary tags, ingredient lists, and step-by-step instructions.
 
 2. **Live Search and Multi-Faceted Filters**:
    - Real-time text search across titles, ingredients, and tags with one-click clear.
-   - Meal type checkboxes (Breakfast, Lunch, Dinner) and difficulty chips (Easy, Medium, Hard).
+   - Meal type checkboxes (Breakfast, Lunch, Dinner, Dessert, Snacks), cuisine checkboxes, difficulty chips (Easy, Medium, Hard), and sort by title, cook time, or difficulty.
    - Dynamic empty states with "Reset Filters" action.
 
 3. **Dynamic Recipe Detail Routing (`/recipes/:id`)**:
@@ -60,8 +60,8 @@ A modern, responsive React web application for recipe discovery, nutritional pla
    - Dedicated favorites page with empty-state guidance.
 
 6. **Custom HTML5 Media Players**:
-   - **`AudioPlayer.jsx`**: Play/Pause controls, scrubbable progress bar, volume toggle, time tracking, and unmount cleanup.
-   - **`VideoPlayer.jsx`**: Video playback engine with poster fallback, custom timeline, fullscreen mode, and unmount cleanup.
+   - **`AudioPlayer.jsx`**: Play/Pause controls, scrubbable progress bar, volume toggle, time tracking, unmount cleanup, and fallback text with a download link when audio isn't supported.
+   - **`VideoPlayer.jsx`**: Video playback engine with a poster image, custom timeline, fullscreen mode, unmount cleanup, and fallback text with a download link when video isn't supported.
 
 ---
 
@@ -84,6 +84,19 @@ src/
 
 ---
 
+## Technologies Used
+
+- **React 19** for the component UI and hooks
+- **Vite** for the development server and production build
+- **React Router 7** for client-side routing, including `/recipes/:id`
+- **CSS Modules** for scoped component styles
+- **PropTypes** for runtime prop validation
+- **Lucide React** and **React Icons** for icons
+- **HTML5 `<video>` and `<audio>`** for cooking tutorials and chef tips, with custom controls and unsupported-browser fallbacks
+- **localStorage** for favorites and weekly meal-plan persistence
+
+---
+
 ## How to View
 
 ```bash
@@ -91,7 +104,7 @@ src/
 npm install
 
 # 2. Run local development server
-npm run dev
+npm start
 
 # 3. Validate lint and production build
 npm run lint

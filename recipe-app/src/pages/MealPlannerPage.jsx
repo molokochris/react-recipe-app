@@ -10,6 +10,7 @@ import { useMealPlan } from "../hooks/useMealPlan";
 import MealPlanner from "../components/MealPlanner/MealPlanner";
 import Header from "../components/common/Header";
 import Button from "../components/UI/Button";
+import styles from "./MealPlannerPage.module.css";
 
 export default function MealPlannerPage() {
   const {
@@ -45,43 +46,41 @@ export default function MealPlannerPage() {
 
   return (
     <main className="page">
-      <div className="wrap" style={{ paddingTop: 32, paddingBottom: 48 }}>
+      <div className={`wrap ${styles.shell}`}>
         <Header
           eyebrow="Meal Organizer"
           title="Weekly Schedule"
           subtitle={weekLabel}
         >
-          <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-            <Button
-              variant="secondary"
-              onClick={prevWeek}
-              ariaLabel="Previous week"
-            >
-              <ChevronLeft size={16} /> Prev
-            </Button>
-            <Button
-              variant="secondary"
-              onClick={nextWeek}
-              ariaLabel="Next week"
-            >
-              Next <ChevronRight size={16} />
-            </Button>
-            <Button
-              variant={confirmClear ? "danger" : "secondary"}
-              onClick={handleClear}
-              ariaLabel="Clear week meals"
-            >
-              {confirmClear ? (
-                <>
-                  <Check size={16} /> Confirm Clear?
-                </>
-              ) : (
-                <>
-                  <Trash2 size={16} /> Clear Week
-                </>
-              )}
-            </Button>
-          </div>
+          <Button
+            variant="secondary"
+            onClick={prevWeek}
+            ariaLabel="Previous week"
+          >
+            <ChevronLeft size={16} /> Prev
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={nextWeek}
+            ariaLabel="Next week"
+          >
+            Next <ChevronRight size={16} />
+          </Button>
+          <Button
+            variant={confirmClear ? "danger" : "secondary"}
+            onClick={handleClear}
+            ariaLabel="Clear week meals"
+          >
+            {confirmClear ? (
+              <>
+                <Check size={16} /> Confirm Clear?
+              </>
+            ) : (
+              <>
+                <Trash2 size={16} /> Clear Week
+              </>
+            )}
+          </Button>
         </Header>
 
         <MealPlanner

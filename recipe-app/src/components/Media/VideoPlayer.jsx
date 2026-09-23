@@ -107,7 +107,15 @@ export default function VideoPlayer({
         onEnded={handleEnded}
         preload="metadata"
         playsInline
-      />
+      >
+        <p className={styles.videoFallback}>
+          Your browser doesn't support video —{" "}
+          <a href={src} download>
+            download it here
+          </a>
+          .
+        </p>
+      </video>
 
       {showCenterPlay && !isPlaying && (
         <button
@@ -116,7 +124,7 @@ export default function VideoPlayer({
           onClick={togglePlay}
           aria-label={`Play ${title}`}
         >
-          <Play size={28} fill="currentColor" style={{ marginLeft: 3 }} />
+          <Play size={28} fill="currentColor" className={styles.playNudge} />
         </button>
       )}
 
@@ -137,7 +145,7 @@ export default function VideoPlayer({
         </div>
 
         <div className={styles.videoControlBar}>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div className={styles.videoControlGroup}>
             <button
               type="button"
               className={styles.videoBtn}

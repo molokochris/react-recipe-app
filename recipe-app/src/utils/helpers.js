@@ -6,10 +6,13 @@
 /**
  * Filter a list of recipes based on query string, meal type, and difficulty level.
  * @param {Array<Object>} recipes - Array of recipe objects
- * @param {Object} filters - Filter criteria { search, mealTypes, difficulty }
+ * @param {Object} filters - Filter criteria { search, mealTypes, cuisines, difficulty }
  * @returns {Array<Object>} Filtered array of recipes
  */
-export function filterRecipes(recipes = [], { search = "", mealTypes = [], difficulty = "" } = {}) {
+export function filterRecipes(
+  recipes = [],
+  { search = "", mealTypes = [], cuisines = [], difficulty = "" } = {},
+) {
   const query = search.trim().toLowerCase();
 
   return recipes.filter((recipe) => {
@@ -18,11 +21,12 @@ export function filterRecipes(recipes = [], { search = "", mealTypes = [], diffi
       const matchTitle = recipe.title?.toLowerCase().includes(query);
       const matchDesc = recipe.description?.toLowerCase().includes(query);
       const matchTags = recipe.tags?.some((t) => t.toLowerCase().includes(query));
+      const matchCuisine = recipe.cuisine?.toLowerCase().includes(query);
       const matchIngredients = recipe.ingredients?.some((ing) =>
         (typeof ing === "string" ? ing : ing.item).toLowerCase().includes(query)
       );
 
-      if (!matchTitle && !matchDesc && !matchTags && !matchIngredients) {
+      if (!matchTitle && !matchDesc && !matchTags && !matchIngredients && !matchCuisine) {
         return false;
       }
     }
@@ -38,7 +42,18 @@ export function filterRecipes(recipes = [], { search = "", mealTypes = [], diffi
       }
     }
 
-    // 3. Difficulty filter (single selection or all)
+    // 3. Cuisine filter (multiple selection)
+    if (cuisines.length > 0) {
+      const recipeCuisine = recipe.cuisine?.toLowerCase();
+      const hasCuisineMatch = cuisines.some(
+        (cuisine) => cuisine.toLowerCase() === recipeCuisine,
+      );
+      if (!hasCuisineMatch) {
+        return false;
+      }
+    }
+
+    // 4. Difficulty filter (single selection or all)
     if (difficulty && difficulty !== "All") {
       if (recipe.difficulty?.toLowerCase() !== difficulty.toLowerCase()) {
         return false;
@@ -47,6 +62,34 @@ export function filterRecipes(recipes = [], { search = "", mealTypes = [], diffi
 
     return true;
   });
+}
+
+const DIFFICULTY_RANK = { easy: 1, medium: 2, hard: 3 };
+
+/**
+ * Sort recipes without mutating the source list.
+ * @param {Array<Object>} recipes
+ * @param {"default"|"title"|"cookTime"|"difficulty"} sortBy
+ * @returns {Array<Object>}
+ */
+export function sortRecipes(recipes = [], sortBy = "default") {
+  const sorted = [...recipes];
+
+  if (sortBy === "title") {
+    sorted.sort((a, b) => a.title.localeCompare(b.title));
+  } else if (sortBy === "cookTime") {
+    sorted.sort(
+      (a, b) => (parseInt(a.cookTime, 10) || 0) - (parseInt(b.cookTime, 10) || 0),
+    );
+  } else if (sortBy === "difficulty") {
+    sorted.sort(
+      (a, b) =>
+        (DIFFICULTY_RANK[a.difficulty?.toLowerCase()] || 0) -
+        (DIFFICULTY_RANK[b.difficulty?.toLowerCase()] || 0),
+    );
+  }
+
+  return sorted;
 }
 
 /**

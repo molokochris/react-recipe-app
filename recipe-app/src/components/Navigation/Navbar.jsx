@@ -45,16 +45,7 @@ export default function Navbar() {
                 >
                   {link.label}
                   {link.to === "/favorites" && favoritesCount > 0 && (
-                    <span
-                      style={{
-                        marginLeft: 8,
-                        background: "var(--primary)",
-                        color: "#fff",
-                        borderRadius: 999,
-                        padding: "2px 8px",
-                        fontSize: 12,
-                      }}
-                    >
+                    <span className={styles.countBadgeMobile}>
                       {favoritesCount}
                     </span>
                   )}
@@ -88,19 +79,7 @@ export default function Navbar() {
               >
                 {link.label}
                 {link.to === "/favorites" && favoritesCount > 0 && (
-                  <span
-                    style={{
-                      marginLeft: 6,
-                      background: "var(--primary)",
-                      color: "#fff",
-                      borderRadius: 999,
-                      padding: "2px 7px",
-                      fontSize: 11,
-                      fontWeight: 700,
-                    }}
-                  >
-                    {favoritesCount}
-                  </span>
+                  <span className={styles.countBadge}>{favoritesCount}</span>
                 )}
               </Link>
             ))}

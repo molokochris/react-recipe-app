@@ -99,7 +99,15 @@ export default function AudioPlayer({
         onLoadedMetadata={handleLoadedMetadata}
         onEnded={handleEnded}
         preload="metadata"
-      />
+      >
+        <p className={styles.audioFallback}>
+          Your browser doesn't support audio —{" "}
+          <a href={src} download>
+            download it here
+          </a>
+          .
+        </p>
+      </audio>
 
       <div className={styles.audioHeader}>
         <div>
@@ -151,7 +159,7 @@ export default function AudioPlayer({
           {isPlaying ? (
             <Pause size={22} fill="currentColor" />
           ) : (
-            <Play size={22} fill="currentColor" style={{ marginLeft: 3 }} />
+            <Play size={22} fill="currentColor" className={styles.playNudge} />
           )}
         </button>
 

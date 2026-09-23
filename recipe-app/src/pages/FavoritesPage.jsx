@@ -10,6 +10,7 @@ import { useFavorites } from "../hooks/useFavorites";
 import RecipeList from "../components/Recipe/RecipeList";
 import Header from "../components/common/Header";
 import Button from "../components/UI/Button";
+import styles from "./FavoritesPage.module.css";
 
 export default function FavoritesPage() {
   const { favoriteRecipes, isFavorite, toggleFavorite, favoritesCount } = useFavorites();
@@ -24,7 +25,7 @@ export default function FavoritesPage() {
 
   return (
     <main className="page">
-      <div className="wrap" style={{ paddingTop: 32, paddingBottom: 48 }}>
+      <div className={`wrap ${styles.shell}`}>
         <Header
           eyebrow="Saved Collection"
           title="Your Favorite Recipes"

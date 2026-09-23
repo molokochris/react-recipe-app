@@ -149,9 +149,15 @@
   overflow-wrap: anywhere;
 }
 
-.audio p {
+.audio p,
+.audioLead {
   max-width: 520px;
   line-height: 1.5;
+}
+
+.audioLead {
+  color: var(--muted);
+  margin: 12px 0 20px;
 }
 
 .player {
@@ -236,7 +242,8 @@
     font-size: 14px;
   }
 
-  .audio p {
+  .audio p,
+  .audioLead {
     font-size: 16px;
   }
 }

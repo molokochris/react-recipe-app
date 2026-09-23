@@ -3,6 +3,7 @@
  * Controlled search input component with live clearing and icon integration.
  */
 
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { Search, X } from "lucide-react";
 import styles from "./UI.module.css";
@@ -15,6 +16,8 @@ export default function SearchBar({
   placeholder = "Search recipes, ingredients...",
   className = "",
 }) {
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
     <form
       className={`${styles.searchWrapper} ${className}`.trim()}
@@ -23,9 +26,11 @@ export default function SearchBar({
       <Search className={styles.searchIcon} size={18} />
       <input
         type="text"
-        className={styles.searchInput}
+        className={`${styles.searchInput} ${isFocused ? styles.searchFocused : ""}`}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         placeholder={placeholder}
         aria-label="Search recipes"
       />
