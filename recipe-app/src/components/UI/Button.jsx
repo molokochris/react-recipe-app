@@ -6,7 +6,7 @@
 import PropTypes from "prop-types";
 import styles from "./UI.module.css";
 
-export default function Button({
+const Button = ({
   children,
   onClick,
   type = "button",
@@ -15,7 +15,7 @@ export default function Button({
   className = "",
   ariaLabel,
   ...props
-}) {
+}) => {
   const variantClass = styles[variant] || styles.primary;
 
   return (
@@ -30,7 +30,9 @@ export default function Button({
       {children}
     </button>
   );
-}
+};
+
+export default Button;
 
 Button.propTypes = {
   /** Button content / label or icons */

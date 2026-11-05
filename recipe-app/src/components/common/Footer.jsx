@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import ShareMenu from "./ShareMenu";
 import styles from "./common.module.css";
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className="wrap">
@@ -67,4 +67,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

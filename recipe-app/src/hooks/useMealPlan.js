@@ -1,14 +1,16 @@
 /**
  * useMealPlan.js
- * Custom hook managing the 7-day meal planner schedule.
- * Persists plan data and week offset to localStorage with useEffect sync.
+ * Custom hook for the weekly meal planner.
+ * Call this once in App and pass the returned values down so every page
+ * reads the same schedule. Each navigable week is stored separately.
  */
 
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { RECIPES_DATA } from "../data/recipesData";
 import { storage } from "../utils/helpers";
 
-const STORAGE_KEY = "platr_meal_plan";
+const PLANS_STORAGE_KEY = "platr_meal_plans";
+const LEGACY_STORAGE_KEY = "platr_meal_plan";
 
 const DEFAULT_DAYS = [
   { name: "Mon", meals: { lunch: "5", dinner: "7" } },
@@ -38,87 +40,163 @@ function formatDate(date) {
   });
 }
 
+function toDateKey(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function getWeekStart(offset) {
+  const monday = getMonday(new Date());
+  monday.setDate(monday.getDate() + offset * 7);
+  return monday;
+}
+
+function emptyWeek() {
+  return DAY_NAMES.map((name) => ({ name, meals: {} }));
+}
+
+function isWeekPlan(value) {
+  return (
+    Array.isArray(value) &&
+    value.length === 7 &&
+    value.every((day) => day && typeof day.meals === "object" && day.meals !== null)
+  );
+}
+
+/** Keep the seven weekday slots and drop computed date numbers before saving. */
+function normalizeWeek(week) {
+  const source = isWeekPlan(week) ? week : emptyWeek();
+  return DAY_NAMES.map((name, index) => ({
+    name,
+    meals: { ...(source[index]?.meals || {}) },
+  }));
+}
+
+/**
+ * Read every saved week. Older builds stored one array under platr_meal_plan;
+ * that array is kept as the current week's schedule.
+ */
+function readPlans(currentKey) {
+  const stored = storage.get(PLANS_STORAGE_KEY, null);
+  if (stored && typeof stored === "object" && !Array.isArray(stored)) {
+    const plans = {};
+    Object.entries(stored).forEach(([key, week]) => {
+      if (isWeekPlan(week)) plans[key] = normalizeWeek(week);
+    });
+    if (Object.keys(plans).length > 0) return plans;
+  }
+
+  const legacy = storage.get(LEGACY_STORAGE_KEY, null);
+  if (isWeekPlan(legacy)) {
+    return { [currentKey]: normalizeWeek(legacy) };
+  }
+
+  return { [currentKey]: normalizeWeek(DEFAULT_DAYS) };
+}
+
 export function useMealPlan() {
   const [weekOffset, setWeekOffset] = useState(0);
-  const [plan, setPlan] = useState(() => {
-    return storage.get(STORAGE_KEY, DEFAULT_DAYS);
+  const [plansByWeek, setPlansByWeek] = useState(() => {
+    return readPlans(toDateKey(getWeekStart(0)));
   });
 
-  const displayedPlan = useMemo(() => {
-    const weekStart = getMonday(new Date());
-    weekStart.setDate(weekStart.getDate() + weekOffset * 7);
+  const weekKey = useMemo(() => toDateKey(getWeekStart(weekOffset)), [weekOffset]);
 
-    return plan.map((day, index) => {
+  const displayedPlan = useMemo(() => {
+    const weekStart = getWeekStart(weekOffset);
+    const storedWeek = plansByWeek[weekKey] || emptyWeek();
+
+    return normalizeWeek(storedWeek).map((day, index) => {
       const date = new Date(weekStart);
       date.setDate(weekStart.getDate() + index);
 
       return {
         ...day,
-        name: DAY_NAMES[index],
         num: date.getDate(),
       };
     });
-  }, [plan, weekOffset]);
+  }, [plansByWeek, weekKey, weekOffset]);
 
-  // Sync state changes with localStorage
+  // Save the whole week map. Prev and Next then reopen their own meals.
   useEffect(() => {
-    storage.set(STORAGE_KEY, plan);
-  }, [plan]);
+    storage.set(PLANS_STORAGE_KEY, plansByWeek);
+  }, [plansByWeek]);
+
+  const updateWeek = useCallback(
+    (updater) => {
+      setPlansByWeek((prevPlans) => {
+        const currentWeek = normalizeWeek(prevPlans[weekKey] || emptyWeek());
+        return {
+          ...prevPlans,
+          [weekKey]: updater(currentWeek),
+        };
+      });
+    },
+    [weekKey],
+  );
 
   /**
-   * Add a recipe to a specific day's meal slot.
+   * Add a recipe to a specific day's meal slot in the week on screen.
    * @param {number} dayIndex - 0-6 (Mon-Sun)
    * @param {'breakfast'|'lunch'|'dinner'} slot
    * @param {string|number} recipeId
    */
-  const addMeal = useCallback((dayIndex, slot, recipeId) => {
-    setPlan((prevPlan) => {
-      return prevPlan.map((day, idx) => {
-        if (idx !== dayIndex) return day;
-        return {
-          ...day,
-          meals: {
-            ...day.meals,
-            [slot]: String(recipeId),
-          },
-        };
-      });
-    });
-  }, []);
+  const addMeal = useCallback(
+    (dayIndex, slot, recipeId) => {
+      updateWeek((currentWeek) =>
+        currentWeek.map((day, idx) => {
+          if (idx !== dayIndex) return day;
+          return {
+            ...day,
+            meals: {
+              ...day.meals,
+              [slot]: String(recipeId),
+            },
+          };
+        }),
+      );
+    },
+    [updateWeek],
+  );
 
   /**
-   * Remove a recipe from a specific day's meal slot.
+   * Remove a recipe from a specific day's meal slot in the week on screen.
    * @param {number} dayIndex - 0-6 (Mon-Sun)
    * @param {'breakfast'|'lunch'|'dinner'} slot
    */
-  const removeMeal = useCallback((dayIndex, slot) => {
-    setPlan((prevPlan) => {
-      return prevPlan.map((day, idx) => {
-        if (idx !== dayIndex) return day;
-        const newMeals = { ...day.meals };
-        delete newMeals[slot];
-        return {
-          ...day,
-          meals: newMeals,
-        };
-      });
-    });
-  }, []);
+  const removeMeal = useCallback(
+    (dayIndex, slot) => {
+      updateWeek((currentWeek) =>
+        currentWeek.map((day, idx) => {
+          if (idx !== dayIndex) return day;
+          const newMeals = { ...day.meals };
+          delete newMeals[slot];
+          return {
+            ...day,
+            meals: newMeals,
+          };
+        }),
+      );
+    },
+    [updateWeek],
+  );
 
   /**
-   * Clear all meal slots for the entire week.
+   * Clear every meal slot for the week currently on screen.
    */
   const clearWeek = useCallback(() => {
-    setPlan((prevPlan) => {
-      return prevPlan.map((day) => ({
+    updateWeek((currentWeek) =>
+      currentWeek.map((day) => ({
         ...day,
         meals: {},
-      }));
-    });
-  }, []);
+      })),
+    );
+  }, [updateWeek]);
 
   /**
-   * Navigate weeks.
+   * Navigate to a different saved week.
    */
   const nextWeek = useCallback(() => setWeekOffset((prev) => prev + 1), []);
   const prevWeek = useCallback(() => setWeekOffset((prev) => prev - 1), []);
@@ -127,8 +205,7 @@ export function useMealPlan() {
    * Computed week title label.
    */
   const weekLabel = useMemo(() => {
-    const weekStart = getMonday(new Date());
-    weekStart.setDate(weekStart.getDate() + weekOffset * 7);
+    const weekStart = getWeekStart(weekOffset);
     const weekEnd = new Date(weekStart);
     weekEnd.setDate(weekStart.getDate() + 6);
     const prefix =
@@ -148,11 +225,12 @@ export function useMealPlan() {
    */
   const getRecipeById = useCallback((recipeId) => {
     if (!recipeId) return null;
-    return RECIPES_DATA.find((r) => String(r.id) === String(recipeId)) || null;
+    return RECIPES_DATA.find((recipe) => String(recipe.id) === String(recipeId)) || null;
   }, []);
 
   return {
     plan: displayedPlan,
+    weekKey,
     addMeal,
     removeMeal,
     clearWeek,

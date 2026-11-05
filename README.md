@@ -51,17 +51,17 @@ A modern, responsive React web application for recipe discovery, nutritional pla
 4. **Weekly Meal Planner (`/meal-planner`)**:
    - 7-day calendar view across `breakfast`, `lunch`, and `dinner` slots.
    - Direct inline recipe picker for empty slots and removal buttons on scheduled meals.
-   - Week navigation (Prev / Next) and safety-confirmed "Clear Week" functionality.
-   - Continuous `localStorage` synchronization via custom hook.
+   - Prev and Next each open a separate week. That week's meals are saved in `localStorage` under its Monday date.
+   - Safety-confirmed "Clear Week" clears only the week on screen.
 
 5. **Favorites System (`/favorites`)**:
-   - Global `useFavorites` hook with `localStorage` persistence.
-   - Real-time navigation counter badge in the Navbar.
+   - Favorites are created once in `App` and passed to the Navbar and pages, so the badge updates as soon as a heart is toggled.
+   - The same list is saved in `localStorage` and shown on the Favorites page.
    - Dedicated favorites page with empty-state guidance.
 
 6. **Custom HTML5 Media Players**:
-   - **`AudioPlayer.jsx`**: Play/Pause controls, scrubbable progress bar, volume toggle, time tracking, unmount cleanup, and fallback text with a download link when audio isn't supported.
-   - **`VideoPlayer.jsx`**: Video playback engine with a poster image, custom timeline, fullscreen mode, unmount cleanup, and fallback text with a download link when video isn't supported.
+   - **`AudioPlayer.jsx`**: Play/Pause controls, scrubbable progress bar, volume toggle, time tracking, unmount cleanup, a visible message when playback fails, and fallback text with a download link when audio isn't supported.
+   - **`VideoPlayer.jsx`**: Video playback engine with a poster image, custom timeline, fullscreen mode, unmount cleanup, a visible message when playback fails, and fallback text with a download link when video isn't supported.
 
 ---
 
@@ -92,7 +92,7 @@ recipe-app/src/
 - **CSS Modules** for scoped component styles
 - **PropTypes** for runtime prop validation
 - **Lucide React** and **React Icons** for icons
-- **HTML5 `<video>` and `<audio>`** for cooking tutorials and chef tips, with custom controls and unsupported-browser fallbacks
+- **HTML5 `<video>` and `<audio>`** for Creative Commons cooking tutorials and spoken cooking tips, with custom controls, playback errors, and unsupported-browser fallbacks
 - **localStorage** for favorites and weekly meal-plan persistence
 
 ---

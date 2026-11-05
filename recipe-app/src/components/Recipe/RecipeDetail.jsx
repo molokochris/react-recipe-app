@@ -17,8 +17,6 @@ import {
   Flame,
 } from "lucide-react";
 import { RECIPES_DATA } from "../../data/recipesData";
-import { useFavorites } from "../../hooks/useFavorites";
-import { useMealPlan } from "../../hooks/useMealPlan";
 import VideoPlayer from "../Media/VideoPlayer";
 import AudioPlayer from "../Media/AudioPlayer";
 import Button from "../UI/Button";
@@ -30,10 +28,13 @@ import styles from "./Recipe.module.css";
 const DAYS_OF_WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const MEAL_SLOTS = ["breakfast", "lunch", "dinner"];
 
-export default function RecipeDetail() {
+const RecipeDetail = ({
+  isFavorite = () => false,
+  onToggleFavorite = () => {},
+  onAddMeal = () => {},
+  weekLabel = "This Week",
+}) => {
   const { id } = useParams();
-  const { isFavorite, toggleFavorite } = useFavorites();
-  const { addMeal } = useMealPlan();
 
   // Find recipe by ID (handling string/number comparison)
   const recipe = RECIPES_DATA.find((r) => String(r.id) === String(id));
@@ -113,10 +114,10 @@ export default function RecipeDetail() {
   };
 
   const handleAddToPlan = () => {
-    addMeal(Number(selectedDayIdx), selectedSlot, recipe.id);
+    onAddMeal(Number(selectedDayIdx), selectedSlot, recipe.id);
     setIsModalOpen(false);
     setToastMessage(
-      `Added to ${DAYS_OF_WEEK[selectedDayIdx]} ${selectedSlot}!`,
+      `Added to ${DAYS_OF_WEEK[selectedDayIdx]} ${selectedSlot} (${weekLabel}).`,
     );
     setTimeout(() => setToastMessage(""), 3500);
   };
@@ -146,7 +147,7 @@ export default function RecipeDetail() {
             aria-label={
               favorited ? "Remove from favorites" : "Add to favorites"
             }
-            onClick={() => toggleFavorite(recipe.id)}
+            onClick={() => onToggleFavorite(recipe.id)}
           >
             <Heart size={18} fill={favorited ? "currentColor" : "none"} />
           </button>
@@ -204,6 +205,7 @@ export default function RecipeDetail() {
           <div>
             <h2 className={styles.mediaHeading}>Video Tutorial</h2>
             <VideoPlayer
+              key={recipe.videoUrl}
               src={recipe.videoUrl}
               poster={recipe.image}
               title={recipe.title}
@@ -215,6 +217,7 @@ export default function RecipeDetail() {
           <div>
             <h2 className={styles.mediaHeading}>Chef's Kitchen Secret</h2>
             <AudioPlayer
+              key={recipe.audioTip.url}
               src={recipe.audioTip.url}
               title={recipe.audioTip.title}
               subtitle={recipe.audioTip.subtitle}
@@ -306,4 +309,6 @@ export default function RecipeDetail() {
       )}
     </main>
   );
-}
+};
+
+export default RecipeDetail;

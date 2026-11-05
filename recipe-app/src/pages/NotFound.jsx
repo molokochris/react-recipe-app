@@ -9,7 +9,7 @@ import Button from "../components/UI/Button";
 import Card from "../components/UI/Card";
 import styles from "./NotFound.module.css";
 
-export default function NotFound() {
+const NotFound = () => {
   const navigate = useNavigate();
 
   return (
@@ -26,4 +26,6 @@ export default function NotFound() {
       </Card>
     </main>
   );
-}
+};
+
+export default NotFound;

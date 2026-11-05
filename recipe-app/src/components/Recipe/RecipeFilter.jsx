@@ -16,7 +16,7 @@ const SORTS = [
   { id: "difficulty", label: "Difficulty" },
 ];
 
-export default function RecipeFilter({
+const RecipeFilter = ({
   selectedMealTypes,
   onToggleMealType,
   selectedCuisines,
@@ -27,7 +27,7 @@ export default function RecipeFilter({
   onSortChange,
   hasActiveFilters,
   onReset,
-}) {
+}) => {
   return (
     <aside className={styles.filters}>
       <div className={styles.filtersHead}>
@@ -102,7 +102,9 @@ export default function RecipeFilter({
       </div>
     </aside>
   );
-}
+};
+
+export default RecipeFilter;
 
 RecipeFilter.propTypes = {
   selectedMealTypes: PropTypes.arrayOf(PropTypes.string).isRequired,

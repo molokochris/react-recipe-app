@@ -1,28 +1,27 @@
 /**
  * MealPlannerPage.jsx
- * Interactive Weekly Meal Planning view connecting custom hooks, week navigation,
- * and calendar grid management.
+ * Weekly meal planner. The schedule comes from App, so Prev and Next
+ * open separately saved weeks.
  */
 
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Trash2, Check } from "lucide-react";
-import { useMealPlan } from "../hooks/useMealPlan";
 import MealPlanner from "../components/MealPlanner/MealPlanner";
 import Header from "../components/common/Header";
 import Button from "../components/UI/Button";
 import styles from "./MealPlannerPage.module.css";
 
-export default function MealPlannerPage() {
-  const {
-    plan,
-    addMeal,
-    removeMeal,
-    clearWeek,
-    prevWeek,
-    nextWeek,
-    weekLabel,
-    getRecipeById,
-  } = useMealPlan();
+const MealPlannerPage = ({
+  plan = [],
+  weekKey = "",
+  onAddMeal = () => {},
+  onRemoveMeal = () => {},
+  onClearWeek = () => {},
+  onPrevWeek = () => {},
+  onNextWeek = () => {},
+  weekLabel = "",
+  getRecipeById = () => null,
+}) => {
 
   const [confirmClear, setConfirmClear] = useState(false);
 
@@ -36,7 +35,7 @@ export default function MealPlannerPage() {
 
   const handleClear = () => {
     if (confirmClear) {
-      clearWeek();
+      onClearWeek();
       setConfirmClear(false);
     } else {
       setConfirmClear(true);
@@ -54,14 +53,14 @@ export default function MealPlannerPage() {
         >
           <Button
             variant="secondary"
-            onClick={prevWeek}
+            onClick={onPrevWeek}
             ariaLabel="Previous week"
           >
             <ChevronLeft size={16} /> Prev
           </Button>
           <Button
             variant="secondary"
-            onClick={nextWeek}
+            onClick={onNextWeek}
             ariaLabel="Next week"
           >
             Next <ChevronRight size={16} />
@@ -85,11 +84,14 @@ export default function MealPlannerPage() {
 
         <MealPlanner
           plan={plan}
+          weekKey={weekKey}
           getRecipeById={getRecipeById}
-          onAddMeal={addMeal}
-          onRemoveMeal={removeMeal}
+          onAddMeal={onAddMeal}
+          onRemoveMeal={onRemoveMeal}
         />
       </div>
     </main>
   );
-}
+};
+
+export default MealPlannerPage;

@@ -6,7 +6,6 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { RECIPES_DATA } from "../data/recipesData";
-import { useFavorites } from "../hooks/useFavorites";
 import { filterRecipes, sortRecipes } from "../utils/helpers";
 import SearchBar from "../components/UI/SearchBar";
 import RecipeList from "../components/Recipe/RecipeList";
@@ -16,8 +15,10 @@ import Loading from "../components/UI/Loading";
 import Header from "../components/common/Header";
 import styles from "./RecipesPage.module.css";
 
-export default function RecipesPage() {
-  const { isFavorite, toggleFavorite } = useFavorites();
+const RecipesPage = ({
+  isFavorite = () => false,
+  onToggleFavorite = () => {},
+}) => {
 
   // Search and filter states
   const [search, setSearch] = useState("");
@@ -94,8 +95,6 @@ export default function RecipesPage() {
           />
         </div>
 
-        {isLoading && <Loading />}
-
         {/* Top Search Bar */}
         <div className={styles.top}>
           <SearchBar
@@ -124,30 +123,38 @@ export default function RecipesPage() {
 
           {/* Recipes Content Area */}
           <div className={styles.contentArea}>
-            <div className={styles.resultsMeta}>
-              <span>
-                Showing <strong>{filteredRecipes.length}</strong> of{" "}
-                {RECIPES_DATA.length} recipes
-              </span>
-            </div>
+            {isLoading ? (
+              <Loading />
+            ) : (
+              <>
+                <div className={styles.resultsMeta}>
+                  <span>
+                    Showing <strong>{filteredRecipes.length}</strong> of{" "}
+                    {RECIPES_DATA.length} recipes
+                  </span>
+                </div>
 
-            <RecipeList
-              recipes={filteredRecipes}
-              isFavorite={isFavorite}
-              onToggleFavorite={toggleFavorite}
-              emptyTitle="No matching recipes found"
-              emptyMessage="We couldn't find any recipes matching your current search or filter combination."
-              emptyAction={
-                hasActiveFilters ? (
-                  <Button variant="secondary" onClick={handleResetFilters}>
-                    Clear Filters
-                  </Button>
-                ) : null
-              }
-            />
+                <RecipeList
+                  recipes={filteredRecipes}
+                  isFavorite={isFavorite}
+                  onToggleFavorite={onToggleFavorite}
+                  emptyTitle="No matching recipes found"
+                  emptyMessage="We couldn't find any recipes matching your current search or filter combination."
+                  emptyAction={
+                    hasActiveFilters ? (
+                      <Button variant="secondary" onClick={handleResetFilters}>
+                        Clear Filters
+                      </Button>
+                    ) : null
+                  }
+                />
+              </>
+            )}
           </div>
         </div>
       </div>
     </main>
   );
-}
+};
+
+export default RecipesPage;

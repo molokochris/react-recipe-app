@@ -9,11 +9,11 @@ import { Clock, Heart, Signal } from "lucide-react";
 import { Link } from "react-router-dom";
 import styles from "./Recipe.module.css";
 
-export default function RecipeCard({
+const RecipeCard = ({
   recipe,
   favorite = false,
   onToggleFavorite,
-}) {
+}) => {
   const handleFavoriteClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -62,7 +62,9 @@ export default function RecipeCard({
       </div>
     </Link>
   );
-}
+};
+
+export default RecipeCard;
 
 RecipeCard.propTypes = {
   /** Recipe data object */

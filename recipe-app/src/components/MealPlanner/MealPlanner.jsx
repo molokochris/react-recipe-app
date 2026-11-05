@@ -7,18 +7,19 @@ import PropTypes from "prop-types";
 import DayCard from "./DayCard";
 import styles from "./MealPlanner.module.css";
 
-export default function MealPlanner({
+const MealPlanner = ({
   plan = [],
+  weekKey = "week",
   getRecipeById,
   onAddMeal,
   onRemoveMeal,
-}) {
+}) => {
   return (
     <div className={styles.container}>
       <div className={styles.weekGrid}>
         {plan.map((day, idx) => (
           <DayCard
-            key={day.name}
+            key={`${weekKey}-${day.name}`}
             day={day}
             dayIndex={idx}
             getRecipeById={getRecipeById}
@@ -29,7 +30,9 @@ export default function MealPlanner({
       </div>
     </div>
   );
-}
+};
+
+export default MealPlanner;
 
 MealPlanner.propTypes = {
   /** Array of 7 day schedule objects */
@@ -40,6 +43,8 @@ MealPlanner.propTypes = {
       meals: PropTypes.object,
     })
   ).isRequired,
+  /** Monday date key for the week on screen, used to reset day cards */
+  weekKey: PropTypes.string,
   /** Recipe lookup helper function */
   getRecipeById: PropTypes.func.isRequired,
   /** Callback to add meal to day and slot */

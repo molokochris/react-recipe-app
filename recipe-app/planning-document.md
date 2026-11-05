@@ -1,10 +1,10 @@
 # Platr: Application Planning Document
 
 ## 1. Project Overview & Component Hierarchy
-Platr is a modern React web application for recipe discovery, dietary filtering, and weekly meal planning with persistent state and native media players.
+Platr is a React app for recipe discovery, filtering, and weekly meal planning.
 
 ```
-App
+App (owns shared favorites and meal-plan state)
 ├── Navbar (Logo)
 ├── Routes
 │   ├── Home (Header, RecipeList -> RecipeCard, AudioPlayer, Button)
@@ -43,14 +43,15 @@ App
 [ recipesData.js ] ◄────────( dynamic state / reactive re-render )─────── [ localStorage ]
 ```
 
-- `useFavorites`: Manages favorite IDs with `useState` and syncs to `platr_favorites` via `useEffect`.
-- `useMealPlan`: Manages 7-day schedule slots (Breakfast, Lunch, Dinner) and syncs to `platr_meal_plan` via `useEffect`.
+- `App` calls `useFavorites` and `useMealPlan` once and passes the values to the Navbar and pages, so pages stay in sync.
+- `useFavorites` stores ids in `platr_favorites`.
+- `useMealPlan` stores each week in `platr_meal_plans`, keyed by Monday. Prev and Next open separate schedules, and Clear Week clears only the week on screen.
 - Callbacks: Child-to-parent events (`onToggleFavorite`, `onAddMeal`, `onRemoveMeal`, `onChange`, `onClear`).
 
 ---
 
 ## 4. Props Strategy & Validation
-All components enforce runtime checks via `prop-types`:
+Shared components enforce runtime checks via `prop-types`:
 - Shapes: `RecipeCard`/`RecipeList` validate recipe objects (`id`, `title`, `image`, `cookTime`, `difficulty`, `tags`).
 - Function Types: Callbacks (`PropTypes.func.isRequired`).
 - Enums: `Button` validates variant styles (`primary`, `secondary`, `danger`, `ghost`, `iconBtn`).

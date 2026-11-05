@@ -8,14 +8,14 @@ import PropTypes from "prop-types";
 import { Search, X } from "lucide-react";
 import styles from "./UI.module.css";
 
-export default function SearchBar({
+const SearchBar = ({
   value,
   onChange,
   onClear,
   onSubmit,
   placeholder = "Search recipes, ingredients...",
   className = "",
-}) {
+}) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
@@ -46,7 +46,9 @@ export default function SearchBar({
       )}
     </form>
   );
-}
+};
+
+export default SearchBar;
 
 SearchBar.propTypes = {
   value: PropTypes.string.isRequired,

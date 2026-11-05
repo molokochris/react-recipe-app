@@ -6,7 +6,7 @@
 import PropTypes from "prop-types";
 import styles from "./UI.module.css";
 
-export default function Card({ children, className = "", style = {}, onClick }) {
+const Card = ({ children, className = "", style = {}, onClick }) => {
   return (
     <div
       className={`${styles.cardContainer} ${className}`.trim()}
@@ -16,7 +16,9 @@ export default function Card({ children, className = "", style = {}, onClick }) 
       {children}
     </div>
   );
-}
+};
+
+export default Card;
 
 Card.propTypes = {
   children: PropTypes.node.isRequired,

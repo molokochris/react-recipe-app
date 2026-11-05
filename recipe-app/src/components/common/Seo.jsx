@@ -14,14 +14,14 @@ function setMeta(attribute, value, content) {
   element.setAttribute("content", content);
 }
 
-export default function Seo({
+const Seo = ({
   title,
   description,
   path = "/",
   image,
   type = "website",
   structuredData,
-}) {
+}) => {
   useEffect(() => {
     const url = `${SITE_URL}${path}`;
     document.title = title;
@@ -65,6 +65,8 @@ export default function Seo({
   }, [description, image, path, structuredData, title, type]);
 
   return null;
-}
+};
+
+export default Seo;
 
 export { SITE_URL };

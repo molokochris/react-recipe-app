@@ -6,7 +6,7 @@
 import { Link } from "react-router-dom";
 import styles from "./common.module.css";
 
-export default function Logo() {
+const Logo = () => {
   return (
     <Link to="/" className={styles.logo} aria-label="Platr home">
       <img
@@ -16,4 +16,6 @@ export default function Logo() {
       />
     </Link>
   );
-}
+};
+
+export default Logo;

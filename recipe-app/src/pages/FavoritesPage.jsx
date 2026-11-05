@@ -6,14 +6,17 @@
 
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useFavorites } from "../hooks/useFavorites";
 import RecipeList from "../components/Recipe/RecipeList";
 import Header from "../components/common/Header";
 import Button from "../components/UI/Button";
 import styles from "./FavoritesPage.module.css";
 
-export default function FavoritesPage() {
-  const { favoriteRecipes, isFavorite, toggleFavorite, favoritesCount } = useFavorites();
+const FavoritesPage = ({
+  favoriteRecipes = [],
+  isFavorite = () => false,
+  onToggleFavorite = () => {},
+  favoritesCount = 0,
+}) => {
 
   // Update document title
   useEffect(() => {
@@ -39,7 +42,7 @@ export default function FavoritesPage() {
         <RecipeList
           recipes={favoriteRecipes}
           isFavorite={isFavorite}
-          onToggleFavorite={toggleFavorite}
+          onToggleFavorite={onToggleFavorite}
           emptyTitle="No favorites saved yet"
           emptyMessage="Browse our recipes and tap the heart icon on any recipe to save it here for quick access!"
           emptyAction={
@@ -51,4 +54,6 @@ export default function FavoritesPage() {
       </div>
     </main>
   );
-}
+};
+
+export default FavoritesPage;

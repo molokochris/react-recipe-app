@@ -2,6 +2,10 @@
  * recipesData.js
  * Central single source of truth for all recipe data in the Platr app.
  * Provides detailed objects for recipes across diverse meal types and difficulty levels.
+ *
+ * Cooking tutorial videos are Creative Commons clips from Wikimedia Commons:
+ * Cooking spaghetti by Grahamss (CC BY-SA 3.0) and America's Test Kitchen shorts (CC BY 3.0).
+ * Spoken cooking tips live in public/assets/audio/tips.
  */
 
 export const RECIPES_DATA = [
@@ -22,12 +26,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/5/5f/Cooking_spaghetti.webm",
     audioTip: {
       title: "Mastering Jammy Eggs",
       subtitle: "Chef Maria - 6-Minute Egg Technique",
       duration: "1:45",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      url: "/assets/audio/tips/jammy-eggs.wav",
     },
     ingredients: [
       { item: "Fresh ramen noodles", amount: "200g" },
@@ -81,12 +85,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1590412200988-a436970781fa?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/c/c6/Mediterranean_Braised_Green_Beans_with_Mint_and_Feta%2C_by_America%27s_Test_Kitchen.webm",
     audioTip: {
       title: "Gentle Egg Poaching",
       subtitle: "Chef Antoine - Low Heat Simmer Secrets",
       duration: "2:10",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+      url: "/assets/audio/tips/gentle-poaching.wav",
     },
     ingredients: [
       { item: "Large eggs", amount: "4-5" },
@@ -139,12 +143,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1727056353458-d985e6aa06b4?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/e/ea/Baked_Crab_Dip_with_Crostini%2C_by_America%27s_Test_Kitchen.webm",
     audioTip: {
       title: "The Perfect Salmon Sear",
       subtitle: "Chef Maria - Skin-Crisping Guide",
       duration: "2:45",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+      url: "/assets/audio/tips/salmon-sear.wav",
     },
     ingredients: [
       { item: "Fresh salmon fillets (skin-on)", amount: "2 (6 oz each)" },
@@ -196,12 +200,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/a/a7/One-Pot_Turkey_Breast_with_Gravy%2C_by_America%27s_Test_Kitchen_2020.webm",
     audioTip: {
       title: "Foolproof Egg Poaching",
       subtitle: "Chef Ken - Vortex & Vinegar Method",
       duration: "1:30",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+      url: "/assets/audio/tips/foolproof-poaching.wav",
     },
     ingredients: [
       { item: "Thick sourdough bread", amount: "1-2 slices" },
@@ -247,12 +251,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/c/c7/Test_Kitchen-_Pork_Roast_with_Fresh_Applesauce_-shorts.webm",
     audioTip: {
       title: "Tahini Dressing Balance",
       subtitle: "Chef Amina - Emulsification Secrets",
       duration: "1:55",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+      url: "/assets/audio/tips/tahini-dressing.wav",
     },
     ingredients: [
       { item: "Medium sweet potatoes (cubed)", amount: "2" },
@@ -304,12 +308,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1568897798550-91c8caffe391?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/c/c6/Mediterranean_Braised_Green_Beans_with_Mint_and_Feta%2C_by_America%27s_Test_Kitchen.webm",
     audioTip: {
       title: "Marinating Chickpeas",
       subtitle: "Chef Nikos - Herb Infusion Technique",
       duration: "1:20",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
+      url: "/assets/audio/tips/marinating-chickpeas.wav",
     },
     ingredients: [
       {
@@ -362,12 +366,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/1/12/Test_Kitchen-_Pork_Belly_Sandwich.webm",
     audioTip: {
       title: "Pan Searing Chicken Breasts",
       subtitle: "Chef Lorenzo - Temperature Control",
       duration: "2:05",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
+      url: "/assets/audio/tips/searing-chicken.wav",
     },
     ingredients: [
       {
@@ -417,12 +421,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1517673400267-0251440c45dc?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/a/a7/One-Pot_Turkey_Breast_with_Gravy%2C_by_America%27s_Test_Kitchen_2020.webm",
     audioTip: {
       title: "Toasting Oats for Maximum Flavor",
       subtitle: "Chef Chloe - Nutty Aromas",
       duration: "1:40",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+      url: "/assets/audio/tips/toasting-oats.wav",
     },
     ingredients: [
       { item: "Steel-cut or rolled oats", amount: "1 cup" },
@@ -468,12 +472,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/5/5f/Cooking_spaghetti.webm",
     audioTip: {
       title: "Getting the Molten Center Right",
       subtitle: "Chef Elena - Timing is Everything",
       duration: "1:50",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      url: "/assets/audio/tips/molten-center.wav",
     },
     ingredients: [
       { item: "Dark chocolate (70%, chopped)", amount: "200g" },
@@ -525,12 +529,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/c/c6/Mediterranean_Braised_Green_Beans_with_Mint_and_Feta%2C_by_America%27s_Test_Kitchen.webm",
     audioTip: {
       title: "Whipping Cream Cheese Smooth",
       subtitle: "Chef Priya - No Lumps, No Problem",
       duration: "1:35",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+      url: "/assets/audio/tips/cream-cheese.wav",
     },
     ingredients: [
       { item: "Graham crackers (crushed)", amount: "1 cup" },
@@ -582,12 +586,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/e/ea/Baked_Crab_Dip_with_Crostini%2C_by_America%27s_Test_Kitchen.webm",
     audioTip: {
       title: "Choosing the Right Apples",
       subtitle: "Chef Daniel - Tart vs Sweet Varieties",
       duration: "1:25",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+      url: "/assets/audio/tips/choosing-apples.wav",
     },
     ingredients: [
       { item: "Baking apples (peeled, sliced)", amount: "6 medium" },
@@ -639,12 +643,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1637949385162-e416fb15b2ce?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/a/a7/One-Pot_Turkey_Breast_with_Gravy%2C_by_America%27s_Test_Kitchen_2020.webm",
     audioTip: {
       title: "Silky Smooth Hummus Every Time",
       subtitle: "Chef Amina - The Ice Water Trick",
       duration: "1:15",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+      url: "/assets/audio/tips/silky-hummus.wav",
     },
     ingredients: [
       { item: "Canned chickpeas (rinsed & drained)", amount: "1 can (400g)" },
@@ -696,12 +700,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/c/c7/Test_Kitchen-_Pork_Roast_with_Fresh_Applesauce_-shorts.webm",
     audioTip: {
       title: "The Secret to Extra-Crunchy Chickpeas",
       subtitle: "Chef Ken - Dry Them Thoroughly First",
       duration: "1:10",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+      url: "/assets/audio/tips/crunchy-chickpeas.wav",
     },
     ingredients: [
       {
@@ -754,12 +758,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/c/c6/Mediterranean_Braised_Green_Beans_with_Mint_and_Feta%2C_by_America%27s_Test_Kitchen.webm",
     audioTip: {
       title: "Getting a Perfect Halloumi Char",
       subtitle: "Chef Nikos - Dry Pan, High Heat",
       duration: "1:20",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
+      url: "/assets/audio/tips/halloumi-char.wav",
     },
     ingredients: [
       { item: "Halloumi cheese (sliced)", amount: "200g" },
@@ -811,12 +815,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1778168199427-4e839943d20f?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/1/12/Test_Kitchen-_Pork_Belly_Sandwich.webm",
     audioTip: {
       title: "Balancing Sweet, Sour & Spicy",
       subtitle: "Chef Malee - The Thai Flavor Triangle",
       duration: "1:40",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
+      url: "/assets/audio/tips/thai-balance.wav",
     },
     ingredients: [
       { item: "Ground chicken", amount: "1 lb (450g)" },
@@ -868,12 +872,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/a/a7/One-Pot_Turkey_Breast_with_Gravy%2C_by_America%27s_Test_Kitchen_2020.webm",
     audioTip: {
       title: "Crispy Skin, Juicy Meat",
       subtitle: "Chef Lorenzo - The Dry-Brine Method",
       duration: "2:00",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+      url: "/assets/audio/tips/crispy-skin.wav",
     },
     ingredients: [
       { item: "Bone-in, skin-on chicken thighs", amount: "6" },
@@ -925,12 +929,12 @@ export const RECIPES_DATA = [
     image:
       "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=600&q=80",
     videoUrl:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "https://upload.wikimedia.org/wikipedia/commons/5/5f/Cooking_spaghetti.webm",
     audioTip: {
       title: "Don't Overcook the Shrimp",
       subtitle: "Chef Malee - The 3-Minute Curl Test",
       duration: "1:30",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      url: "/assets/audio/tips/shrimp-curl.wav",
     },
     ingredients: [
       { item: "Large shrimp (peeled, deveined)", amount: "1 lb (450g)" },

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { FaFacebookF, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import styles from "./common.module.css";
 
-export default function ShareMenu({ title = "Share Platr" }) {
+const ShareMenu = ({ title = "Share Platr" }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const menuRef = useRef(null);
@@ -99,4 +99,6 @@ export default function ShareMenu({ title = "Share Platr" }) {
       )}
     </div>
   );
-}
+};
+
+export default ShareMenu;

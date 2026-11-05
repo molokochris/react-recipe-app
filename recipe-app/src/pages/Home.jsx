@@ -6,15 +6,13 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { RECIPES_DATA } from "../data/recipesData";
-import { useFavorites } from "../hooks/useFavorites";
 import RecipeList from "../components/Recipe/RecipeList";
 import AudioPlayer from "../components/Media/AudioPlayer";
 import Seo from "../components/common/Seo";
 import Button from "../components/UI/Button";
 import styles from "./Home.module.css";
 
-export default function Home() {
-  const { isFavorite, toggleFavorite } = useFavorites();
+const Home = ({ isFavorite = () => false, onToggleFavorite = () => {} }) => {
 
   // Top 3 featured or trending recipes
   const trendingRecipes = RECIPES_DATA.slice(0, 3);
@@ -82,7 +80,7 @@ export default function Home() {
           <RecipeList
             recipes={trendingRecipes}
             isFavorite={isFavorite}
-            onToggleFavorite={toggleFavorite}
+            onToggleFavorite={onToggleFavorite}
           />
         </section>
 
@@ -100,7 +98,7 @@ export default function Home() {
               restaurant-quality crust without overcooking the center.
             </p>
             <AudioPlayer
-              src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+              src="/assets/audio/tips/perfect-sear.wav"
               title="Mastering the Sear"
               subtitle="Episode 42: Kitchen Secrets"
               badge="Chef Maria"
@@ -110,4 +108,6 @@ export default function Home() {
       </div>
     </main>
   );
-}
+};
+
+export default Home;

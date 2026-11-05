@@ -12,13 +12,13 @@ import styles from "./MealPlanner.module.css";
 
 const SLOTS = ["breakfast", "lunch", "dinner"];
 
-export default function DayCard({
+const DayCard = ({
   day,
   dayIndex,
   getRecipeById,
   onAddMeal,
   onRemoveMeal,
-}) {
+}) => {
   const [activeSelectSlot, setActiveSelectSlot] = useState(null);
 
   const handleSelectRecipe = (slot, recipeId) => {
@@ -96,7 +96,9 @@ export default function DayCard({
       </div>
     </article>
   );
-}
+};
+
+export default DayCard;
 
 DayCard.propTypes = {
   /** Day data object containing name, day number, and meals object */

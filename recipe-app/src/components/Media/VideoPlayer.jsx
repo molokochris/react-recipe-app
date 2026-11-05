@@ -9,12 +9,12 @@ import { Play, Pause, Maximize, Volume2, VolumeX } from "lucide-react";
 import { formatTime } from "../../utils/helpers";
 import styles from "./Media.module.css";
 
-export default function VideoPlayer({
+const VideoPlayer = ({
   src,
   poster,
   title = "Step-by-Step Video Guide",
   className = "",
-}) {
+}) => {
   const videoRef = useRef(null);
   const progressTrackRef = useRef(null);
 
@@ -23,6 +23,7 @@ export default function VideoPlayer({
   const [duration, setDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [showCenterPlay, setShowCenterPlay] = useState(true);
+  const [playbackError, setPlaybackError] = useState("");
 
   // Pause and cleanup video when component unmounts or source changes
   useEffect(() => {
@@ -34,6 +35,12 @@ export default function VideoPlayer({
     };
   }, [src]);
 
+  const showPlaybackError = () => {
+    setIsPlaying(false);
+    setShowCenterPlay(true);
+    setPlaybackError("This cooking tutorial could not be played. Check your connection and try again.");
+  };
+
   const togglePlay = () => {
     if (!videoRef.current) return;
     if (isPlaying) {
@@ -41,11 +48,10 @@ export default function VideoPlayer({
       setIsPlaying(false);
       setShowCenterPlay(true);
     } else {
-      videoRef.current.play().catch((err) => {
-        console.warn("Video playback error:", err);
+      setPlaybackError("");
+      videoRef.current.play().catch(() => {
+        showPlaybackError();
       });
-      setIsPlaying(true);
-      setShowCenterPlay(false);
     }
   };
 
@@ -95,93 +101,108 @@ export default function VideoPlayer({
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div className={`${styles.videoContainer} ${className}`.trim()}>
-      <video
-        ref={videoRef}
-        src={src}
-        poster={poster}
-        className={styles.videoElement}
-        onClick={togglePlay}
-        onTimeUpdate={handleTimeUpdate}
-        onLoadedMetadata={handleLoadedMetadata}
-        onEnded={handleEnded}
-        preload="metadata"
-        playsInline
-      >
-        <p className={styles.videoFallback}>
-          Your browser doesn't support video —{" "}
-          <a href={src} download>
-            download it here
-          </a>
-          .
-        </p>
-      </video>
-
-      {showCenterPlay && !isPlaying && (
-        <button
-          type="button"
-          className={styles.centerPlayOverlay}
+    <div className={`${styles.playerShell} ${className}`.trim()}>
+      <div className={styles.videoContainer}>
+        <video
+          ref={videoRef}
+          src={src}
+          poster={poster}
+          className={styles.videoElement}
           onClick={togglePlay}
-          aria-label={`Play ${title}`}
+          onTimeUpdate={handleTimeUpdate}
+          onLoadedMetadata={handleLoadedMetadata}
+          onEnded={handleEnded}
+          onError={showPlaybackError}
+          onPlay={() => {
+            setPlaybackError("");
+            setIsPlaying(true);
+            setShowCenterPlay(false);
+          }}
+          preload="metadata"
+          playsInline
         >
-          <Play size={28} fill="currentColor" className={styles.playNudge} />
-        </button>
-      )}
+          <p className={styles.videoFallback}>
+            Your browser doesn't support video —{" "}
+            <a href={src} download>
+              download it here
+            </a>
+            .
+          </p>
+        </video>
 
-      <div className={styles.overlayControls}>
-        <div
-          ref={progressTrackRef}
-          className={styles.progressTrack}
-          onClick={handleSeek}
-          role="progressbar"
-          aria-valuenow={progressPercent}
-          aria-valuemin="0"
-          aria-valuemax="100"
-        >
-          <div
-            className={styles.progressFill}
-            style={{ width: `${progressPercent}%` }}
-          />
-        </div>
-
-        <div className={styles.videoControlBar}>
-          <div className={styles.videoControlGroup}>
-            <button
-              type="button"
-              className={styles.videoBtn}
-              onClick={togglePlay}
-              aria-label={isPlaying ? "Pause" : "Play"}
-            >
-              {isPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" />}
-            </button>
-
-            <button
-              type="button"
-              className={styles.videoBtn}
-              onClick={toggleMute}
-              aria-label={isMuted ? "Unmute" : "Mute"}
-            >
-              {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
-            </button>
-
-            <span className={styles.videoTime}>
-              {formatTime(currentTime)} / {formatTime(duration)}
-            </span>
-          </div>
-
+        {showCenterPlay && !isPlaying && (
           <button
             type="button"
-            className={styles.videoBtn}
-            onClick={toggleFullscreen}
-            aria-label="Fullscreen"
+            className={styles.centerPlayOverlay}
+            onClick={togglePlay}
+            aria-label={`Play ${title}`}
           >
-            <Maximize size={18} />
+            <Play size={28} fill="currentColor" className={styles.playNudge} />
           </button>
+        )}
+
+        <div className={styles.overlayControls}>
+          <div
+            ref={progressTrackRef}
+            className={styles.progressTrack}
+            onClick={handleSeek}
+            role="progressbar"
+            aria-valuenow={progressPercent}
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <div
+              className={styles.progressFill}
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+
+          <div className={styles.videoControlBar}>
+            <div className={styles.videoControlGroup}>
+              <button
+                type="button"
+                className={styles.videoBtn}
+                onClick={togglePlay}
+                aria-label={isPlaying ? "Pause" : "Play"}
+              >
+                {isPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" />}
+              </button>
+
+              <button
+                type="button"
+                className={styles.videoBtn}
+                onClick={toggleMute}
+                aria-label={isMuted ? "Unmute" : "Mute"}
+              >
+                {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+              </button>
+
+              <span className={styles.videoTime}>
+                {formatTime(currentTime)} / {formatTime(duration)}
+              </span>
+            </div>
+
+            <button
+              type="button"
+              className={styles.videoBtn}
+              onClick={toggleFullscreen}
+              aria-label="Fullscreen"
+            >
+              <Maximize size={18} />
+            </button>
+          </div>
         </div>
       </div>
+      {playbackError && (
+        <p className={styles.mediaError} role="alert">
+          {playbackError}
+        </p>
+      )}
     </div>
   );
-}
+};
+
+export default VideoPlayer;
 
 VideoPlayer.propTypes = {
   /** Video media source URL */

@@ -10,13 +10,13 @@ import { Play, Pause, Volume2, VolumeX, RotateCcw } from "lucide-react";
 import { formatTime } from "../../utils/helpers";
 import styles from "./Media.module.css";
 
-export default function AudioPlayer({
+const AudioPlayer = ({
   src,
   title = "Chef's Audio Cooking Tip",
   subtitle = "Kitchen Secrets & Techniques",
   badge = "Daily Tip",
   className = "",
-}) {
+}) => {
   const audioRef = useRef(null);
   const progressTrackRef = useRef(null);
 
@@ -24,6 +24,7 @@ export default function AudioPlayer({
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
+  const [playbackError, setPlaybackError] = useState("");
 
   // Pause and cleanup audio when component unmounts or source changes
   useEffect(() => {
@@ -35,14 +36,20 @@ export default function AudioPlayer({
     };
   }, [src]);
 
+  const showPlaybackError = () => {
+    setIsPlaying(false);
+    setPlaybackError("This cooking tip could not be played. Check your connection and try again.");
+  };
+
   // Sync play/pause with audio ref
   const togglePlay = () => {
     if (!audioRef.current) return;
     if (isPlaying) {
       audioRef.current.pause();
     } else {
-      audioRef.current.play().catch((err) => {
-        console.warn("Audio playback interrupted or not permitted:", err);
+      setPlaybackError("");
+      audioRef.current.play().catch(() => {
+        showPlaybackError();
       });
     }
   };
@@ -93,11 +100,15 @@ export default function AudioPlayer({
       <audio
         ref={audioRef}
         src={src}
-        onPlay={() => setIsPlaying(true)}
+        onPlay={() => {
+          setIsPlaying(true);
+          setPlaybackError("");
+        }}
         onPause={() => setIsPlaying(false)}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
         onEnded={handleEnded}
+        onError={showPlaybackError}
         preload="metadata"
       >
         <p className={styles.audioFallback}>
@@ -172,9 +183,16 @@ export default function AudioPlayer({
           {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
         </button>
       </div>
+      {playbackError && (
+        <p className={styles.mediaError} role="alert">
+          {playbackError}
+        </p>
+      )}
     </div>
   );
-}
+};
+
+export default AudioPlayer;
 
 AudioPlayer.propTypes = {
   /** Audio source URL */

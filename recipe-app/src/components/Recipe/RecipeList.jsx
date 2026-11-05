@@ -8,14 +8,14 @@ import { Utensils } from "lucide-react";
 import RecipeCard from "./RecipeCard";
 import styles from "./Recipe.module.css";
 
-export default function RecipeList({
+const RecipeList = ({
   recipes = [],
   isFavorite = () => false,
   onToggleFavorite,
   emptyTitle = "No recipes found",
   emptyMessage = "Try adjusting your search criteria or filter selections.",
   emptyAction,
-}) {
+}) => {
   if (!recipes || recipes.length === 0) {
     return (
       <div className={styles.emptyState}>
@@ -39,7 +39,9 @@ export default function RecipeList({
       ))}
     </div>
   );
-}
+};
+
+export default RecipeList;
 
 RecipeList.propTypes = {
   /** Array of recipe objects */

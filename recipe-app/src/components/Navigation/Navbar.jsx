@@ -4,10 +4,10 @@
  */
 
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Logo from "../common/Logo";
-import { useFavorites } from "../../hooks/useFavorites";
 import styles from "./Navbar.module.css";
 
 const links = [
@@ -17,10 +17,9 @@ const links = [
   { to: "/favorites", label: "Favorites", match: (path) => path === "/favorites" },
 ];
 
-export default function Navbar() {
+const Navbar = ({ favoritesCount = 0 }) => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const { favoritesCount } = useFavorites();
 
   return (
     <>
@@ -88,4 +87,11 @@ export default function Navbar() {
       </header>
     </>
   );
-}
+};
+
+export default Navbar;
+
+Navbar.propTypes = {
+  /** Live count from the shared favorites state in App */
+  favoritesCount: PropTypes.number,
+};

@@ -6,7 +6,7 @@
 import PropTypes from "prop-types";
 import styles from "./UI.module.css";
 
-export default function Modal({ title, onClose, children }) {
+const Modal = ({ title, onClose, children }) => {
   return (
     <div className={styles.modalBackdrop} onClick={onClose}>
       <div
@@ -23,7 +23,9 @@ export default function Modal({ title, onClose, children }) {
       </div>
     </div>
   );
-}
+};
+
+export default Modal;
 
 Modal.propTypes = {
   /** Dialog heading */

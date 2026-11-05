@@ -6,13 +6,13 @@
 import PropTypes from "prop-types";
 import styles from "./common.module.css";
 
-export default function Header({
+const Header = ({
   eyebrow,
   title,
   subtitle,
   children,
   className = "",
-}) {
+}) => {
   return (
     <header className={`${styles.headerContainer} ${className}`.trim()}>
       <div className={styles.headerTop}>
@@ -25,7 +25,9 @@ export default function Header({
       {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
     </header>
   );
-}
+};
+
+export default Header;
 
 Header.propTypes = {
   /** Optional small category/eyebrow tag above the title */

@@ -1,7 +1,8 @@
 /**
  * useFavorites.js
  * Custom hook managing the user's favorite recipe IDs.
- * Persists data to localStorage with useEffect sync and provides convenient helper functions.
+ * Call this once in App and pass the returned values to the Navbar and pages.
+ * A second call would keep a separate list, so the badge would not update live.
  */
 
 import { useState, useEffect, useMemo, useCallback } from "react";
