@@ -70,12 +70,12 @@ A modern, responsive React web application for recipe discovery, nutritional pla
 ```
 src/
 ├── components/
-│   ├── common/ (Footer.jsx, Header.jsx, Logo.jsx)
+│   ├── common/ (Footer.jsx, Header.jsx, Logo.jsx, Seo.jsx, ShareMenu.jsx)
 │   ├── MealPlanner/ (DayCard.jsx, MealPlanner.jsx)
 │   ├── Media/ (AudioPlayer.jsx, VideoPlayer.jsx)
 │   ├── Navigation/ (Navbar.jsx)
-│   ├── Recipe/ (RecipeCard.jsx, RecipeDetail.jsx, RecipeList.jsx)
-│   └── UI/ (Button.jsx, Card.jsx, SearchBar.jsx)
+│   ├── Recipe/ (RecipeCard.jsx, RecipeDetail.jsx, RecipeFilter.jsx, RecipeList.jsx)
+│   └── UI/ (Button.jsx, Card.jsx, Loading.jsx, Modal.jsx, SearchBar.jsx)
 ├── data/ (recipesData.js)
 ├── hooks/ (useFavorites.js, useMealPlan.js)
 ├── pages/ (FavoritesPage.jsx, Home.jsx, MealPlannerPage.jsx, NotFound.jsx, RecipesPage.jsx)
